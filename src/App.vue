@@ -5,29 +5,42 @@
       color="primary"
       dark
     >
-      <div class="d-flex align-center justify-center">
+      <div class="d-flex align-center">
         ReCheck Authorizer
       </div>
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <router-view />
     </v-content>
+
+    <v-bottom-navigation
+      v-model="bottomNav"
+    >
+      <v-btn value="home" to="/">
+        <span>Home</span>
+      </v-btn>
+      <v-btn value="scan" to="/scan">
+        <span>Scan</span>
+      </v-btn>
+      <v-btn value="identity" to="/identity">
+        <span>Identity</span>
+      </v-btn>
+    </v-bottom-navigation>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
-
 export default {
   name: 'App',
 
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      bottomNav: 'scan',
+    };
   },
 
-  data: () => ({
-    //
-  }),
+  mounted() { },
+
 };
 </script>
