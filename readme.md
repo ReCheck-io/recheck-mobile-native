@@ -1,5 +1,19 @@
 # recheck-mobile-native
 
+### To build project you need env file
+*Each (production/development) scripts loads file for itself* <br />
+`.env.production.local` for production settings/scripts <br />
+`.env.development.local` for development settings/scripts
+
+Example `.env.production.local` file:
+```bash
+# production (logs disabled) or debug (logs enabled)
+VUE_APP_LOGGER_MODE=production
+
+# api endpoint,network needed for init function
+VUE_APP_API_ENV=https://beta.recheck.io,ae
+```
+
 ## Project setup
 ```sh
 npm install
@@ -16,12 +30,10 @@ npm run lint
 ### Cordova part, serve in android emulator
 npm run cordova-serve-android
 
-### Cordova part, first build (needs to be signed)
+### Cordova part, build for android (needs to be signed)
 npm run cordova-build-android
 
 ### DEV: Build .apk in debug mode
 cd src-cordova && cordova build android --prod
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

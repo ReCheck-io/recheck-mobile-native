@@ -14,6 +14,13 @@ Vue.use(VueReCheckAuthorizer);
 
 Vue.config.productionTip = false;
 
+// new Vue({
+//   store,
+//   router,
+//   vuetify,
+//   render: (h) => h(App),
+// }).$mount('#app');
+
 const init = () => {
   new Vue({
     store,
