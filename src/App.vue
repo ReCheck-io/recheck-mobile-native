@@ -1,47 +1,35 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        ReCheck Authorizer
-      </div>
-    </v-app-bar>
+  <v-app toolbar>
+    <AppToolbar />
 
     <v-content>
       <router-view />
     </v-content>
-
-    <v-bottom-navigation
-      fixed
-      v-model="bottomNav"
-    >
-      <v-btn value="home" to="/">
-        <span>Home</span>
-        <v-icon>mdi-view-dashboard</v-icon>
-      </v-btn>
-      <v-btn value="scan" to="/scan">
-        <span>Scan</span>
-        <v-icon>mdi-qrcode</v-icon>
-      </v-btn>
-      <v-btn value="identity" to="/identity">
-        <span>Identity</span>
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
-    </v-bottom-navigation>
   </v-app>
 </template>
 
 <script>
+import AppToolbar from '@/components/AppToolbar.vue';
+
 export default {
   name: 'App',
 
+  components: {
+    AppToolbar
+  },
+
   data() {
-    return {
-      bottomNav: 'home',
-    };
+    return {};
   },
 };
 </script>
+
+<style>
+body {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Roboto, 'Open Sans',
+  'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+}
+</style>

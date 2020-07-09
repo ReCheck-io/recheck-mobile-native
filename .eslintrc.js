@@ -12,8 +12,9 @@ module.exports = {
   },
   rules: {
     'no-alert': 0,
-    'comma-dangle': 0,
     'no-console': 0,
     'no-debugger': 0,
+    'comma-dangle': 0,
+    'import/prefer-default-export': 0,
   },
 };

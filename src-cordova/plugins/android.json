@@ -1,0 +1,24 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.recheck.app"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.recheck.app"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "com.recheck.app"
+    },
+    "cordova-plugin-permission": {
+      "PACKAGE_NAME": "com.recheck.app"
+    }
+  },
+  "dependent_plugins": {}
+}
