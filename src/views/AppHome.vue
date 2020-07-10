@@ -23,7 +23,7 @@
 
         <v-card v-if="pinned">
           <v-img class="white--text" height="100px" src="../assets/recheck-data.jpg">
-            <v-container fluid v-flex justify-center>
+            <v-container fluid>
               <h2>Sensitive Data Protection and Exchange</h2>
             </v-container>
           </v-img>
@@ -35,7 +35,7 @@
           </v-card-text>
           <v-layout justify-center>
             <v-card-actions>
-              <v-btn to="/" color="green" dark>SCAN</v-btn>
+              <v-btn to="/scan" color="green" dark>SCAN</v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>
