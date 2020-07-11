@@ -13,19 +13,9 @@ const AppIdentity = (resolve) => {
     resolve(require('@/views/AppIdentity'));
   });
 };
-const AppSettings = (resolve) => {
-  require.ensure(['@/views/AppSettings'], () => {
-    resolve(require('@/views/AppSettings'));
-  });
-};
 const AppPrivacy = (resolve) => {
   require.ensure(['@/views/AppPrivacy'], () => {
     resolve(require('@/views/AppPrivacy'));
-  });
-};
-const AppHelp = (resolve) => {
-  require.ensure(['@/views/AppHelp'], () => {
-    resolve(require('@/views/AppHelp'));
   });
 };
 
@@ -52,22 +42,10 @@ const router = new Router({
       component: AppIdentity,
     },
     {
-      path: '/settings',
-      name: 'Settings',
-      default: false,
-      component: AppSettings,
-    },
-    {
       path: '/privacy',
       name: 'Privacy',
       default: false,
       component: AppPrivacy,
-    },
-    {
-      path: '/help',
-      name: 'Help',
-      default: false,
-      component: AppHelp,
     },
     {
       path: '*',

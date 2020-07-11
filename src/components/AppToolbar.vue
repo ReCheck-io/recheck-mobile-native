@@ -1,7 +1,12 @@
 <template>
   <div>
     <v-navigation-drawer v-model="drawer" app>
-      <v-toolbar class="primary" />
+      <v-toolbar class="primary">
+        <v-img max-width="90px" src="../assets/recheck-logo.png"></v-img>
+        <v-btn @click="drawer = false" icon fixed right color="white">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-toolbar>
       <v-list-item
         v-for="(item, i) in items"
         :key="`item_${i}`"
@@ -21,7 +26,7 @@
     <v-app-bar class="primary" clipped-left app>
       <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title @click="goHome" class="white--text">
-        <b>My ReCheck</b>
+        <v-img max-width="90px" src="../assets/recheck-logo.png"></v-img>
       </v-toolbar-title>
       <v-btn to="/scan" icon fixed right color="white">
         <v-icon>mdi-camera-iris</v-icon>
@@ -40,10 +45,9 @@ export default {
 
       items: [
         { icon: 'mdi-view-dashboard', text: 'Home', route: '/home' },
+        { icon: 'mdi-camera-iris', text: 'Camera', route: '/scan' },
         { icon: 'mdi-account', text: 'My Identity', route: '/identity' },
-        { icon: 'mdi-cog', text: 'Security Settings', route: '/settings' },
         { icon: 'mdi-note', text: 'Terms and Privacy', route: '/privacy' },
-        { icon: 'mdi-help', text: 'Help', route: '/help' },
       ]
     };
   },
