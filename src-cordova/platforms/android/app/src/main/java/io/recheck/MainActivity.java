@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.recheck.app;
+package io.recheck;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

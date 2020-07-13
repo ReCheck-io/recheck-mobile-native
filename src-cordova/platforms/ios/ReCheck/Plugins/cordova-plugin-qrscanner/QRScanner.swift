@@ -480,8 +480,12 @@ class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
             }
         } else {
             // pre iOS 10.0
-            UIApplication.shared.openURL(NSURL(string: UIApplicationOpenSettingsURLString)! as URL)
-            self.getStatus(command)
+            if #available(iOS 8.0, *) {
+                UIApplication.shared.openURL(NSURL(string: UIApplicationOpenSettingsURLString)! as URL)
+                self.getStatus(command)
+            } else {
+                self.sendErrorCode(command: command, error: QRScannerError.open_settings_unavailable)
+            }
         }
     }
 }

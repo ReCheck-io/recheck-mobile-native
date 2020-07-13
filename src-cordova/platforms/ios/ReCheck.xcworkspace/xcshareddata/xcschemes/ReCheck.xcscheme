@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "My ReCheck.app"
-               BlueprintName = "My ReCheck"
-               ReferencedContainer = "container:My ReCheck.xcodeproj">
+               BuildableName = "ReCheck.app"
+               BlueprintName = "ReCheck"
+               ReferencedContainer = "container:ReCheck.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "My ReCheck.app"
-            BlueprintName = "My ReCheck"
-            ReferencedContainer = "container:My ReCheck.xcodeproj">
+            BuildableName = "ReCheck.app"
+            BlueprintName = "ReCheck"
+            ReferencedContainer = "container:ReCheck.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "My ReCheck.app"
-            BlueprintName = "My ReCheck"
-            ReferencedContainer = "container:My ReCheck.xcodeproj">
+            BuildableName = "ReCheck.app"
+            BlueprintName = "ReCheck"
+            ReferencedContainer = "container:ReCheck.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "My ReCheck.app"
-            BlueprintName = "My ReCheck"
-            ReferencedContainer = "container:My ReCheck.xcodeproj">
+            BuildableName = "ReCheck.app"
+            BlueprintName = "ReCheck"
+            ReferencedContainer = "container:ReCheck.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

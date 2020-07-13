@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.recheck.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>My ReCheck</name>
+<widget id="io.recheck" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ReCheck</name>
     <description>
-        My ReCheck - ReCheck's native mobile app.
+        ReCheck - ReCheck's native mobile app.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="info@recheck.io" href="https://recheck.io">
+        ReCheck Team
     </author>
     <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
     <content src="index.html" />
     <access origin="*" />
-    <engine name="android" spec="^8.0.0" />
+    <engine name="android" spec="^6.0.0" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -24,6 +24,8 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <plugin name="cordova-plugin-dialogs" spec="^2.0.2" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-dialogs" spec="~2.0.2" />
+    <plugin name="cordova-plugin-qrscanner" spec="~3.0.1" />
+    <plugin name="cordova-plugin-permission" spec="~0.1.0" />
 </widget>
