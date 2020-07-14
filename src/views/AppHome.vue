@@ -68,8 +68,6 @@
 export default {
   name: 'AppHome',
 
-  components: {},
-
   data() {
     return {
       pinned: true

@@ -33,7 +33,10 @@ npm run cordova-serve-android
 ### Cordova part, build for android (needs to be signed)
 npm run cordova-build-android
 
-### DEV: Build .apk in debug mode
-cd src-cordova && cordova build android --prod
+### Cordova part, serve in ios emulator
+npm run cordova-serve-ios
+
+### Cordova part, build for ios (needs to be signed)
+npm run cordova-build-ios
 ```
 

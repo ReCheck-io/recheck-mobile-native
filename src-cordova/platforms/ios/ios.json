@@ -23,8 +23,10 @@
         "parents": {
           "NSCameraUsageDescription": [
             {
-              "xml": "<string>The camera is used to scan QR codes.</string>",
-              "count": 1
+              "xml": "<string>need camera access to take pictures</string>",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml"
             }
           ]
         }

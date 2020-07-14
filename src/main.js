@@ -16,7 +16,7 @@ Vue.use(VueReCheckAuthorizer);
 
 Vue.config.productionTip = false;
 
-const init = () => {
+const initApp = () => {
   new Vue({
     store,
     router,
@@ -27,9 +27,8 @@ const init = () => {
 
 // Wait for the deviceready event to start the render
 document.addEventListener('deviceready', () => {
-  // eslint-disable-next-line
-  console.log("Ready, Render the App");
-  init();
+  initApp();
+
   const permission = ['android.permission.CAMERA'];
   const Permissions = window.plugins.Permission;
   Permissions.has(permission, (results) => {

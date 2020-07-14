@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "www-build": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-build-ios",
     "build-cordova": "npm run build && cross-env CORDOVA_PLATFORM=android && cd src-cordova && cordova build android --prod",
     "cordova-build-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android",
     "cordova-serve-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-serve-android",

@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0",
-  "name": "my-recheck",
-  "displayName": "My ReCheck",
-  "description": "ReCheck native app.",
+  "version": "1.0.3",
+  "name": "recheck",
+  "displayName": "ReCheck",
+  "description": "ReCheck - native mobile app.",
   "author": "ReCheck Team",
   "license": "MIT",
   "main": "index.js",

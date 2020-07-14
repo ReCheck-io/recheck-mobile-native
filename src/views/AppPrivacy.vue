@@ -506,7 +506,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'AppPrivacy',
+};
 </script>
 
 <style>

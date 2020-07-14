@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+.vscode/
 
 # local env files
 .env.local
@@ -22,6 +23,9 @@ pnpm-debug.log*
 *.sw?
 
 # Cordova
+./src-cordova/**/node_modules
+./src-cordova/platforms/android/app/src/main/res/**/*.png
+./src-cordova/platforms/ios/ReCheck/Images.xcassets/AppIcon.appiconset/*.png
 # /src-cordova/platforms
 # /src-cordova/plugins
 # /public/cordova.js
