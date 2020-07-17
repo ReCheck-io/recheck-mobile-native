@@ -18,6 +18,9 @@
     },
     "cordova-plugin-permission": {
       "PACKAGE_NAME": "com.recheck.app"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.recheck.android"
     }
   },
   "dependent_plugins": {}

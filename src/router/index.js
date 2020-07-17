@@ -54,4 +54,9 @@ const router = new Router({
   ],
 });
 
+router.beforeResolve((to, from, next) => {
+  window.resolvedFrom = from;
+  next();
+});
+
 export default router;

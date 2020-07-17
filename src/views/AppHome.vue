@@ -3,7 +3,12 @@
     <v-layout style="margin-top: 2rem; margin-bottom: 2rem;">
       <v-flex>
         <v-card v-if="!pinned">
-          <v-img class="white--text" height="100px" src="../assets/recheck-welcome.jpg">
+          <v-img
+            fade-img-on-scroll
+            height="100px"
+            class="white--text"
+            src="../assets/recheck-welcome.jpg"
+          >
             <v-container fluid>
               <h2 center>Sensitive Data Protection and Exchange</h2>
             </v-container>
@@ -16,13 +21,18 @@
           </v-card-text>
           <v-layout justify-center>
             <v-card-actions>
-              <v-btn to="/identity" color="green" dark>Sign up!</v-btn>
+              <v-btn large to="/identity" color="green" dark>Sign up!</v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>
 
         <v-card v-if="pinned">
-          <v-img class="white--text" height="100px" src="../assets/recheck-data.jpg">
+          <v-img
+            fade-img-on-scroll
+            height="100px"
+            class="white--text"
+            src="../assets/recheck-data.jpg"
+          >
             <v-container fluid>
               <h2>Sensitive Data Protection and Exchange</h2>
             </v-container>
@@ -40,8 +50,13 @@
           </v-layout>
         </v-card>
 
-        <v-card v-if="pinned" style="margin-top: 2rem; margin-bottom: 2rem;">
-          <v-img class="white--text" height="100px" src="../assets/recheck-data.jpg">
+        <v-card v-if="pinned" style="margin-top: 2rem;">
+          <v-img
+            fade-img-on-scroll
+            height="100px"
+            class="white--text"
+            src="../assets/recheck-data.jpg"
+          >
             <v-container fluid>
               <h2>Your data is finally YOURS!</h2>
             </v-container>
@@ -65,13 +80,24 @@
 </template>
 
 <script>
+import chainClient from 'vue-recheck-authorizer/src/chain/index';
+
 export default {
   name: 'AppHome',
 
   data() {
     return {
-      pinned: true
+      pinned: false,
     };
-  }
+  },
+
+  mounted() {
+    this.pinned = chainClient.pinned();
+
+    if (window.resolvedFrom.path === '/scan') {
+      window.QRScanner.cancelScan((status) => console.log(status));
+      window.QRScanner.destroy((status) => console.log(status));
+    }
+  },
 };
 </script>

@@ -508,6 +508,13 @@
 <script>
 export default {
   name: 'AppPrivacy',
+
+  mounted() {
+    if (window.resolvedFrom.path === '/scan') {
+      window.QRScanner.cancelScan((status) => console.log(status));
+      window.QRScanner.destroy((status) => console.log(status));
+    }
+  },
 };
 </script>
 

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget 
-    id="io.recheck" 
+    id="io.recheck"
     version="1.0.3"
     ios-CFBundleIdentifier="io.recheck"
     android-packageName="io.recheck.android"
@@ -8,12 +8,9 @@
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
 >
     <name>ReCheck</name>
-    <description>
-        ReCheck - ReCheck's native mobile app.
-    </description>
-    <author email="info@recheck.io" href="https://recheck.io">
-        ReCheck Team
-    </author>
+    <description>ReCheck - ReCheck's native mobile app.</description>
+    <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
+
     <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
     <content src="index.html" />
     <access origin="*" />
@@ -24,6 +21,15 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <engine name="android" spec="^6.0.0" />
+
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-dialogs" spec="~2.0.2" />
+    <plugin name="cordova-plugin-qrscanner" spec="~3.0.1" />
+    <plugin name="cordova-plugin-permission" spec="~0.1.0" />
+
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#04558a" />
+
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="android-minSdkVersion" value="19" />
@@ -39,11 +45,7 @@
         <allow-intent href="itms-apps:*" />
 
         <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-            <string>need camera access to take pictures</string>
+            <string>need camera access to scan QR code</string>
         </edit-config>
     </platform>
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-dialogs" spec="~2.0.2" />
-    <plugin name="cordova-plugin-qrscanner" spec="~3.0.1" />
-    <plugin name="cordova-plugin-permission" spec="~0.1.0" />
 </widget>

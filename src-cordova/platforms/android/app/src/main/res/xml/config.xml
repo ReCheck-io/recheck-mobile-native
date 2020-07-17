@@ -13,13 +13,13 @@
     <feature name="Permission">
         <param name="android-package" value="com.adrianodigiovanni.permission.CDVPermission" />
     </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
     <name>ReCheck</name>
-    <description>
-        ReCheck - ReCheck's native mobile app.
-    </description>
-    <author email="info@recheck.io" href="https://recheck.io">
-        ReCheck Team
-    </author>
+    <description>ReCheck - ReCheck's native mobile app.</description>
+    <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
     <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
     <content src="index.html" />
     <access origin="*" />
@@ -36,5 +36,7 @@
     <icon density="xxhdpi" src="res/android/mipmap-xxhdpi/ic_launcher.png" />
     <icon density="xxxhdpi" src="res/android/mipmap-xxxhdpi/ic_launcher.png" />
     <preference name="loglevel" value="DEBUG" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#04558a" />
     <preference name="android-minSdkVersion" value="19" />
 </widget>

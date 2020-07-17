@@ -25,13 +25,13 @@
     <feature name="QRScanner">
         <param name="ios-package" value="QRScanner" />
     </feature>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" />
+        <param name="onload" value="true" />
+    </feature>
     <name>ReCheck</name>
-    <description>
-        ReCheck - ReCheck's native mobile app.
-    </description>
-    <author email="info@recheck.io" href="https://recheck.io">
-        ReCheck Team
-    </author>
+    <description>ReCheck - ReCheck's native mobile app.</description>
+    <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
     <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
     <content src="index.html" />
     <access origin="*" />
@@ -44,7 +44,7 @@
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-        <string>need camera access to take pictures</string>
+        <string>need camera access to scan QR code</string>
     </edit-config>
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
@@ -59,4 +59,7 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarBackgroundColor" value="#04558a" />
 </widget>

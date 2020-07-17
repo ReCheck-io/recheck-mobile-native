@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="drawer" app>
       <v-toolbar class="primary">
         <v-img max-width="90px" src="../assets/recheck-logo.png"></v-img>
-        <v-btn @click="drawer = false" icon fixed right color="white">
+        <v-btn @click="drawer = !drawer" icon fixed right color="white">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
@@ -11,7 +11,7 @@
         v-for="(item, i) in items"
         :key="`item_${i}`"
         :to="item.route"
-        @click="toggleDrawer"
+        @click="drawer = !drawer"
       >
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
@@ -25,10 +25,8 @@
 
     <v-app-bar class="primary" clipped-left app>
       <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title @click="goHome" class="white--text">
-        <v-img max-width="90px" src="../assets/recheck-logo.png"></v-img>
-      </v-toolbar-title>
-      <v-btn to="/scan" icon fixed right color="white">
+      <v-toolbar-title class="white--text">{{ pageTitle }}</v-toolbar-title>
+      <v-btn to="/scan" color="white" icon fixed right>
         <v-icon>mdi-camera-iris</v-icon>
       </v-btn>
     </v-app-bar>
@@ -36,12 +34,15 @@
 </template>
 
 <script>
+import router from '@/router';
+
 export default {
   name: 'AppToolbar',
 
   data() {
     return {
       drawer: false,
+      pageTitle: 'Home',
 
       items: [
         { icon: 'mdi-view-dashboard', text: 'Home', route: '/home' },
@@ -57,8 +58,14 @@ export default {
       this.drawer = !this.drawer;
     },
     goHome() {
-      window.location.hash = '/';
+      router.push('/');
     }
+  },
+
+  watch: {
+    $route(res) {
+      this.pageTitle = res.name;
+    },
   }
 };
 </script>

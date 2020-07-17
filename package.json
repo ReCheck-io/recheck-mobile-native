@@ -1,13 +1,20 @@
 {
-  "name": "recheck-mobile-native",
-  "version": "0.1.0",
   "private": true,
+  "version": "1.0.3",
+  "name": "recheck-mobile-native",
+  "description": "ReCheck - ReCheck's native mobile application.",
+  "author": {
+    "name": "ReCheck Team",
+    "email": "info@recheck.io"
+  },
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "www-build": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-build-ios",
-    "build-cordova": "npm run build && cross-env CORDOVA_PLATFORM=android && cd src-cordova && cordova build android --prod",
+    "build-cordova": "npm run build-www && cd src-cordova && cordova build android --prod",
+    "build-www": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-only-www-android",
+    "cordova-serve-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-serve-browser",
     "cordova-build-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android",
     "cordova-serve-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-serve-android",
     "cordova-serve-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-serve-ios",
@@ -18,10 +25,10 @@
     "vue": "^2.6.11",
     "vue-cordova": "^0.1.2",
     "vue-qrcode-reader": "^2.3.3",
-    "vue-recheck-authorizer": "^1.0.7",
+    "vue-recheck-authorizer": "^1.0.26",
     "vue-router": "^3.3.4",
-    "vuetify": "^2.2.11",
-    "vuex": "^3.4.0"
+    "vuetify": "^2.3.4",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",

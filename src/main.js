@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueCordova from 'vue-cordova';
 import VueQRCodeScanner from 'vue-qrcode-reader';
 import VueReCheckAuthorizer from 'vue-recheck-authorizer';
+import chainClient from 'vue-recheck-authorizer/src/chain/index';
 
 import App from './App.vue';
 import store from './store';
@@ -22,20 +23,31 @@ const initApp = () => {
     router,
     vuetify,
     render: (h) => h(App),
+
+    methods: {
+      checkPinned() {
+        if (!chainClient.pinned()) {
+          router.push('/identity');
+        } else {
+          router.push('/scan');
+        }
+      }
+    },
+    mounted() {
+      this.checkPinned();
+    }
   }).$mount('#app');
 };
 
 // Wait for the deviceready event to start the render
 document.addEventListener('deviceready', () => {
-  initApp();
-
-  const permission = ['android.permission.CAMERA'];
-  const Permissions = window.plugins.Permission;
-  Permissions.has(permission, (results) => {
-    if (!results[permission]) {
+  window.QRScanner.getStatus((status) => {
+    if (!status.prepared) {
       window.QRScanner.prepare();
     }
-  }, alert);
+  });
+
+  initApp();
 });
 
 // If we are not in Cordova, manually trigger the deviceready event
