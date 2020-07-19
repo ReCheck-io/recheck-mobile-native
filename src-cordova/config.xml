@@ -1,16 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget 
-    id="io.recheck"
-    version="1.0.3"
-    ios-CFBundleIdentifier="io.recheck"
-    android-packageName="io.recheck.android"
-    xmlns="http://www.w3.org/ns/widgets" 
-    xmlns:cdv="http://cordova.apache.org/ns/1.0"
->
+<widget android-packageName="io.recheck.android" id="io.recheck" ios-CFBundleIdentifier="io.recheck" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ReCheck</name>
     <description>ReCheck - ReCheck's native mobile app.</description>
     <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
-
     <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
     <content src="index.html" />
     <access origin="*" />
@@ -21,31 +13,33 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <engine name="android" spec="^6.0.0" />
-
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-dialogs" spec="~2.0.2" />
-    <plugin name="cordova-plugin-qrscanner" spec="~3.0.1" />
-    <plugin name="cordova-plugin-permission" spec="~0.1.0" />
-
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#04558a" />
-
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="android-minSdkVersion" value="19" />
-
-        <icon src="res/android/mipmap-mdpi/ic_launcher.png" density="mdpi" />
-        <icon src="res/android/mipmap-hdpi/ic_launcher.png" density="hdpi" />
-        <icon src="res/android/mipmap-xhdpi/ic_launcher.png" density="xhdpi" />
-        <icon src="res/android/mipmap-xxhdpi/ic_launcher.png" density="xxhdpi" />
-        <icon src="res/android/mipmap-xxxhdpi/ic_launcher.png" density="xxxhdpi" />
+        <icon density="mdpi" src="res/android/mipmap-mdpi/ic_launcher.png" />
+        <icon density="hdpi" src="res/android/mipmap-hdpi/ic_launcher.png" />
+        <icon density="xhdpi" src="res/android/mipmap-xhdpi/ic_launcher.png" />
+        <icon density="xxhdpi" src="res/android/mipmap-xxhdpi/ic_launcher.png" />
+        <icon density="xxxhdpi" src="res/android/mipmap-xxxhdpi/ic_launcher.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-
-        <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+        <preference name="WKWebViewOnly" value="true" />
+        <feature name="CDVWKWebViewEngine">
+            <param name="ios-package" value="CDVWKWebViewEngine" />
+        </feature>
+        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+        <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
             <string>need camera access to scan QR code</string>
         </edit-config>
     </platform>
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-dialogs" spec="~2.0.2" />
+    <plugin name="cordova-plugin-qrscanner" spec="~3.0.1" />
+    <plugin name="cordova-plugin-permission" spec="~0.1.0" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.4.3" />
+    <plugin name="cordova-plugin-wkwebview-engine" spec="~1.2.1" />
 </widget>

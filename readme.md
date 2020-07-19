@@ -16,7 +16,16 @@ VUE_APP_API_ENV=https://beta.recheck.io,ae
 
 ## Project setup
 ```sh
-npm install
+### Prepare project
+
+### Isntall all dependencies both for Vuejs and Cordova project
+npm install && cd src-cordova && npm install
+
+### Prepare Cordova project (install platforms and plugins)
+cd src-cordova && cordova prepare
+
+
+### Scripts
 
 ### Compiles and hot-reloads for development
 npm run serve
