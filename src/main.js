@@ -35,6 +35,10 @@ const initApp = () => {
     },
     mounted() {
       this.checkPinned();
+
+      document.addEventListener('backbutton', (e) => {
+        e.preventDefault();
+      }, false);
     }
   }).$mount('#app');
 };

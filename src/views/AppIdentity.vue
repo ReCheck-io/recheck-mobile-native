@@ -7,13 +7,6 @@
 <script>
 export default {
   name: 'AppIdentity',
-
-  mounted() {
-    if (window.resolvedFrom.path === '/scan') {
-      window.QRScanner.cancelScan((status) => console.log(status));
-      window.QRScanner.destroy((status) => console.log(status));
-    }
-  },
 };
 </script>
 
@@ -21,10 +14,20 @@ export default {
 .my-styles {
   text-align: center;
 
+  .btn {
+    padding: 11px 0;
+  }
+
   .card {
     max-width: 400px !important;
 
+    &-header {
+      padding: 10px 20px;
+    }
+
     &-body {
+      padding: 14px 22px 14px 22px;
+
       p {
         margin: 0;
       }
@@ -39,7 +42,7 @@ export default {
 
   .modal {
     &-body {
-      padding: 22px 22px 12px 22px;
+      padding: 14px 22px 14px 22px;
     }
 
     &-footer {

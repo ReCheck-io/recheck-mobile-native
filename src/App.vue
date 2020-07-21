@@ -2,21 +2,30 @@
   <v-app toolbar :style="{ backgroundColor: isScanPage }">
     <AppToolbar />
 
+    <StatusOverlay />
+
     <v-content>
       <router-view />
     </v-content>
+
+    <AppNavbar />
   </v-app>
 </template>
 
 <script>
-import AppToolbar from '@/components/AppToolbar.vue';
 import router from '@/router';
+import AppToolbar from '@/components/AppToolbar.vue';
+import AppNavbar from '@/components/AppNavbar.vue';
+import StatusOverlay from '@/components/StatusOverlay.vue';
+import chainClient from 'vue-recheck-authorizer/src/chain/index';
 
 export default {
   name: 'App',
 
   components: {
-    AppToolbar
+    AppToolbar,
+    AppNavbar,
+    StatusOverlay,
   },
 
   data() {
@@ -27,16 +36,11 @@ export default {
 
   mounted() {
     this.checkIsScanPage(router.history.current);
-
-    if (window.resolvedFrom.path === '/scan') {
-      window.QRScanner.cancelScan((status) => console.log(status));
-      window.QRScanner.destroy((status) => console.log(status));
-    }
   },
 
   methods: {
     checkIsScanPage(res) {
-      if (res.path === '/scan') {
+      if (chainClient.pinned() && res.path === '/scan') {
         this.isScanPage = 'transparent';
       } else {
         this.isScanPage = '#FFFFFF';

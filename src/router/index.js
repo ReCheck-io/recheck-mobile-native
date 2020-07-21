@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 import Vue from 'vue';
 import Router from 'vue-router';
-import AppHome from '@/views/AppHome.vue';
+import chainClient from 'vue-recheck-authorizer/src/chain/index';
 
 const AppCamera = (resolve) => {
   require.ensure(['@/views/AppCamera'], () => {
@@ -13,9 +13,9 @@ const AppIdentity = (resolve) => {
     resolve(require('@/views/AppIdentity'));
   });
 };
-const AppPrivacy = (resolve) => {
-  require.ensure(['@/views/AppPrivacy'], () => {
-    resolve(require('@/views/AppPrivacy'));
+const AppAbout = (resolve) => {
+  require.ensure(['@/views/AppAbout'], () => {
+    resolve(require('@/views/AppAbout'));
   });
 };
 
@@ -24,28 +24,19 @@ Vue.use(Router);
 const router = new Router({
   routes: [
     {
+      name: 'About',
       path: '/',
-      name: 'Home',
-      default: false,
-      component: AppHome,
+      component: AppAbout,
     },
     {
+      name: 'Scan',
       path: '/scan',
-      name: 'Camera',
-      default: true,
       component: AppCamera,
     },
     {
-      path: '/identity',
       name: 'Identity',
-      default: false,
+      path: '/identity',
       component: AppIdentity,
-    },
-    {
-      path: '/privacy',
-      name: 'Privacy',
-      default: false,
-      component: AppPrivacy,
     },
     {
       path: '*',
@@ -54,9 +45,21 @@ const router = new Router({
   ],
 });
 
-router.beforeResolve((to, from, next) => {
-  window.resolvedFrom = from;
-  next();
+router.beforeEach((to, from, next) => {
+  if (from.path === '/scan') {
+    window.QRScanner.cancelScan((status) => console.log(status));
+    window.QRScanner.destroy((status) => console.log(status));
+    window.QRScanner.hide((status) => console.log(status));
+  }
+
+  if (!chainClient.pinned() && to.path !== '/identity') {
+    next({
+      path: '/identity',
+      query: { redirect: to.fullPath }
+    });
+  } else {
+    next();
+  }
 });
 
 export default router;

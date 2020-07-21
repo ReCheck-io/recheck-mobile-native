@@ -1,36 +1,42 @@
 <template>
   <v-container>
     <recheck-scanner
+      @scan-result="handleResult"
       :handledByComponent="true"
       :useIntegratedCamera="false"
     />
-    <div class="guides">
+    <div class="guides" v-if="pinned">
       <img class="qr-scan-guides" src="../assets/scan.png">
     </div>
-    <v-btn large @click="goBack" color="primary" class="go-back-btn">
-      Go Home
-    </v-btn>
   </v-container>
 </template>
 
 <script>
-import router from '@/router';
+import chainClient from 'vue-recheck-authorizer/src/chain/index';
 
 export default {
   name: 'AppHome',
 
   data() {
     return {
+      pinned: false,
       handledByComponent: true,
       useIntegratedCamera: false,
     };
   },
 
+  mounted() {
+    this.pinned = chainClient.pinned();
+  },
+
   methods: {
-    goBack() {
-      window.QRScanner.cancelScan((status) => console.log(status));
-      window.QRScanner.destroy((status) => console.log(status));
-      router.push('/');
+    handleResult(hasError) {
+      console.log(hasError);
+      if (!hasError) {
+        this.$root.$emit('overlayOn', 'success');
+      } else {
+        this.$root.$emit('overlayOn', 'error');
+      }
     }
   }
 };
@@ -53,16 +59,5 @@ export default {
     margin-bottom: 3em;
     max-height: 50%;
   }
-}
-
-.go-back-btn {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  border-radius: 0;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
 }
 </style>
