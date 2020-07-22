@@ -56,17 +56,15 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 body {
-  font-family: 'Roboto', -apple-system, 'Open Sans', sans-serif;
+  font-family: -apple-system, 'Open Sans', sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
 }
 
-.alert {
-  p {
-    margin-bottom: 0;
-  }
+.alert p {
+  margin-bottom: 0;
 }
 </style>

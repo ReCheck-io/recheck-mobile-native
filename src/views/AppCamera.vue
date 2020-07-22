@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <recheck-scanner
+      classes="my-styles"
       @scan-result="handleResult"
       :handledByComponent="true"
       :useIntegratedCamera="false"
@@ -31,7 +32,6 @@ export default {
 
   methods: {
     handleResult(hasError) {
-      console.log(hasError);
       if (!hasError) {
         this.$root.$emit('overlayOn', 'success');
       } else {
@@ -43,20 +43,37 @@ export default {
 </script>
 
 <style lang="scss">
+.my-styles {
+  text-align: center;
+
+  .btn {
+    padding: 11px 0;
+  }
+
+  .modal {
+    &-body {
+      padding: 14px 22px 14px 22px;
+    }
+
+    &-footer {
+      padding: 0 20px 14px 20px;
+    }
+  }
+}
 .guides {
   display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   height: 100%;
   width: 100%;
-  align-items: center;
-  justify-content: center;
   top: 0;
   left: 0;
 
   .qr-scan-guides {
     width: 60%;
     max-width: 400px;
-    margin-bottom: 3em;
+    margin-bottom: 1em;
     max-height: 50%;
   }
 }

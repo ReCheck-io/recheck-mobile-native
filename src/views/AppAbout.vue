@@ -26,21 +26,23 @@
           Terms and Privacy Policy
         </a>
       </p>
+      <p class="text-caption text-center mt-4 mb-0" style="line-height: 1;">
+        Copyright &copy; 2016 - 2020 &mdash; ReCheck B.V.
+      </p>
+      <p class="text-caption text-center mb-0">Version {{ version }}</p>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import pkg from '../../package.json';
+
 export default {
   name: 'AppAbout',
 
   data() {
     return {
-      tab: null,
-      tabs: [
-        { id: 1, title: 'About' },
-        { id: 2, title: 'FAQ' }
-      ]
+      version: pkg.version
     };
   },
 };
