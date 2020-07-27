@@ -64,6 +64,10 @@ body {
   line-height: 1;
 }
 
+.modal-body .form-group .savePin {
+  display: none;
+}
+
 .alert p {
   margin-bottom: 0;
 }

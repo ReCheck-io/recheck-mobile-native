@@ -62,7 +62,8 @@ export default {
 </script>
 
 <style>
-.v-icon.mdi.mdi-check {
+.v-icon.mdi.mdi-check,
+.v-icon.mdi.mdi-close {
   font-size: 56px;
   font-weight: 500;
   display: flex;

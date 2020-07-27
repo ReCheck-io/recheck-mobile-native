@@ -31,14 +31,31 @@ const initApp = () => {
         } else {
           router.push('/scan');
         }
+      },
+      checkConnection() {
+        navigator.connection.getInfo((res) => {
+          if (res !== 'none') {
+            this.checkPinned();
+
+            document.addEventListener('backbutton', (e) => {
+              e.preventDefault();
+            }, false);
+          } else {
+            navigator.notification.confirm(
+              'No network connection.', (result) => {
+                if (result === 1) {
+                  this.checkConnection();
+                } else if (result === 2) {
+                  navigator.app.exitApp();
+                }
+              }, 'Network Status', ['Try Again', 'cancel']
+            );
+          }
+        });
       }
     },
     mounted() {
-      this.checkPinned();
-
-      document.addEventListener('backbutton', (e) => {
-        e.preventDefault();
-      }, false);
+      this.checkConnection();
     }
   }).$mount('#app');
 };

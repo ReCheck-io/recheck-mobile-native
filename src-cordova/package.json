@@ -12,6 +12,7 @@
     "cordova-ios": "^5.1.1",
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-qrscanner": "^3.0.1",
     "cordova-plugin-splashscreen": "^6.0.0",
@@ -29,7 +30,8 @@
       "cordova-plugin-permission": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-wkwebview-engine": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-network-information": {}
     },
     "platforms": [
       "android",
