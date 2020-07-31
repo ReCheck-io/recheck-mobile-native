@@ -1,13 +1,10 @@
 <template>
   <v-app toolbar :style="{ backgroundColor: isScanPage }">
     <AppToolbar />
-
     <StatusOverlay />
-
     <v-content>
       <router-view />
     </v-content>
-
     <AppNavbar />
   </v-app>
 </template>
@@ -30,7 +27,7 @@ export default {
 
   data() {
     return {
-      isScanPage: '#FFFFFF'
+      isScanPage: '#FFFFFF',
     };
   },
 
@@ -58,7 +55,7 @@ export default {
 
 <style>
 body {
-  font-family: -apple-system, 'Open Sans', sans-serif;
+  font-family: "Roboto", -apple-system, 'Open Sans', sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1;

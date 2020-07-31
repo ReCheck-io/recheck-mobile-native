@@ -36,10 +36,6 @@ const initApp = () => {
         navigator.connection.getInfo((res) => {
           if (res !== 'none') {
             this.checkPinned();
-
-            document.addEventListener('backbutton', (e) => {
-              e.preventDefault();
-            }, false);
           } else {
             navigator.notification.confirm(
               'No network connection.', (result) => {

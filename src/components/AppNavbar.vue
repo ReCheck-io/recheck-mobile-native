@@ -6,7 +6,8 @@
     fixed
     horizontal
     class="primary"
-    v-model="bottomNav"
+    v-model="activeBtn"
+    :input-value="showNav"
   >
     <v-btn to="/scan" value="Camera">
       <span>Scan</span>
@@ -27,17 +28,20 @@ export default {
 
   data() {
     return {
-      bottomNav: 2,
-
-      items: [
-        { icon: 'mdi-qrcode-scan', text: 'Scan', route: '/scan' },
-        { icon: 'mdi-account', text: 'My Identity', route: '/identity' },
-      ]
+      activeBtn: 2,
+      showNav: true,
     };
   },
 
   mounted() {
-    this.bottomNav = !chainClient.pinned() ? 1 : 2;
+    this.activeBtn = !chainClient.pinned() ? 1 : 2;
+
+    this.$root.$on('focusin', (res) => {
+      this.showNav = res;
+    });
+    this.$root.$on('focusout', (res) => {
+      this.showNav = res;
+    });
   },
 };
 </script>

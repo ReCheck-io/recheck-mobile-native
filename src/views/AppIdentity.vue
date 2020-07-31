@@ -5,8 +5,26 @@
 </template>
 
 <script>
+import chainClient from 'vue-recheck-authorizer/src/chain/index';
+
 export default {
   name: 'AppIdentity',
+
+  data() {
+    return {
+      pinned: false,
+    };
+  },
+
+  mounted() {
+    this.pinned = chainClient.pinned();
+
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach((input) => {
+      input.addEventListener('focusin', () => this.$root.$emit('focusin', false));
+      input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
+    });
+  },
 };
 </script>
 
