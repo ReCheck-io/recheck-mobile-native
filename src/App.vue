@@ -2,9 +2,12 @@
   <v-app toolbar :style="{ backgroundColor: isScanPage }">
     <AppToolbar />
     <StatusOverlay />
+
     <v-content>
       <router-view />
+      <AppAlert :isBackupDone="pinned && !isBackupDone" />
     </v-content>
+
     <AppNavbar />
   </v-app>
 </template>
@@ -13,6 +16,7 @@
 import router from '@/router';
 import AppToolbar from '@/components/AppToolbar.vue';
 import AppNavbar from '@/components/AppNavbar.vue';
+import AppAlert from '@/components/AppAlert.vue';
 import StatusOverlay from '@/components/StatusOverlay.vue';
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
 
@@ -22,17 +26,31 @@ export default {
   components: {
     AppToolbar,
     AppNavbar,
+    AppAlert,
     StatusOverlay,
   },
 
   data() {
     return {
+      pinned: false,
+      isBackupDone: true,
       isScanPage: '#FFFFFF',
     };
   },
 
   mounted() {
+    this.pinned = chainClient.pinned();
     this.checkIsScanPage(router.history.current);
+
+    this.isBackupDone = JSON.parse(localStorage.getItem('backupDone'));
+
+    if (chainClient.pinned()) {
+      setTimeout(() => {
+        if (!this.isBackupDone) {
+          this.isBackupDone = true;
+        }
+      }, 7000);
+    }
   },
 
   methods: {

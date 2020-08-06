@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="py-0">
     <recheck-scanner
       classes="my-styles"
       @scan-result="handleResult"
@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       pinned: false,
+      isBackupDone: false,
       handledByComponent: true,
       useIntegratedCamera: false,
     };
@@ -33,12 +34,7 @@ export default {
 
   mounted() {
     this.pinned = chainClient.pinned();
-
-    const inputs = document.querySelectorAll('input');
-    inputs.forEach((input) => {
-      input.addEventListener('focusin', () => this.$root.$emit('focusin', false));
-      input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
-    });
+    this.inputFocusListeners();
   },
 
   methods: {
@@ -48,6 +44,14 @@ export default {
       } else {
         this.$root.$emit('overlayOn', 'error');
       }
+    },
+
+    inputFocusListeners() {
+      const inputs = document.querySelectorAll('input');
+      inputs.forEach((input) => {
+        input.addEventListener('focusin', () => this.$root.$emit('focusin', false));
+        input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
+      });
     }
   }
 };
@@ -59,6 +63,10 @@ export default {
 
   .btn {
     padding: 11px 0;
+
+    &-block {
+      width: 100%;
+    }
   }
 
   .modal {

@@ -13,6 +13,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <engine name="android" spec="^6.0.0" />
+    <preference name="AndroidLaunchMode" value="singleTask" />
 
     <preference name="Orientation" value="portrait" />
 
