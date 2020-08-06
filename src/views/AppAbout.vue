@@ -1,48 +1,46 @@
 <template>
   <v-card flat tile>
     <v-card-text>
-      <h2 class="mt-1 mb-5 text-center">About My Recheck</h2>
+      <h2 class="mt-1 mb-5 text-center">About ipOcean</h2>
       <p>
-        My ReCheck is a game changer that helps you protect your data, share it
-        with ultimate privacy and manage all interactions with the files.
-        This is an all-in-one solution for bulletproof information exchange
-        and secure data management.
-        <br />
-        <br />
-        With My ReCheck you are in control of your digital identity and only you
-        can access your valuable digital content. No one can track you online
-        and data tampering, fraud or spam are successfully avoided.
-        <br />
-        <br />
-        Most importantly, you will enjoy verifiable digital proofs
-        (ReCheck Certificates) that your data existed, was shared or signed
-        exactly at a specific point in time. The certificates will help you in
-        case of disputes, fraudulent activities or lawsuits.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur,
+        possimus aliquam. Ipsum neque alias facere doloribus fuga earum quisquam
+        minima saepe sint tenetur vel aspernatur quibusdam, vero, quidem aut
+        accusamus.
+      </p>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic amet
+        recusandae nemo ipsum explicabo ut minus fugit ullam. Fugit reiciendis,
+        veritatis suscipit quibusdam distinctio tempore ut nam quas voluptates
+        cupiditate.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+        laudantium, minima consequatur inventore odit, molestias debitis numquam
+        minus nihil corrupti pariatur temporibus impedit cupiditate unde eveniet
+        aliquam dolorem libero. Quae.
       </p>
 
       <p class="d-flex justify-space-around my-3">
-        <a href="https://recheck.io/contact-us/" target="_blank">Contact Us</a>
-        <a href="https://recheck.io/privacy-policy-terms-of-use/" target="_blank">
-          Terms and Privacy Policy
+        <a href="https://ipocean.com/" target="_blank">Contact Us</a>
+        <a href="https://ipocean.com/privacy-policy/" target="_blank">
+          Privacy Policy
         </a>
       </p>
       <p class="text-caption text-center mt-4 mb-0" style="line-height: 1;">
-        Copyright &copy; 2016 - 2020 &mdash; ReCheck B.V.
+        Copyright &copy; {{ currentYear }} &mdash; ipOcean GmbH
       </p>
-      <p class="text-caption text-center mb-0">Version {{ version }}</p>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-import pkg from '../../package.json';
-
 export default {
   name: 'AppAbout',
 
   data() {
     return {
-      version: pkg.version
+      currentYear: new Date().getFullYear()
     };
   },
 };

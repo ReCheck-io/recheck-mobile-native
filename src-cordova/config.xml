@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="io.recheck.android" id="io.recheck" ios-CFBundleIdentifier="io.recheck" version="1.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ReCheck</name>
-    <description>ReCheck - ReCheck's native mobile app.</description>
-    <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
+<widget android-packageName="com.ipocean.android" id="com.ipocean.ios" ios-CFBundleIdentifier="com.ipocean.ios" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ipOcean</name>
+    <description>ipOcean</description>
+    <author email="estoyanov@ipocean.com" href="https://ipocean.com">ipOcean Team</author>
     <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
     <content src="index.html" />
     <access origin="*" />
@@ -14,44 +14,37 @@
     <allow-intent href="geo:*" />
     <engine name="android" spec="^6.0.0" />
     <preference name="AndroidLaunchMode" value="singleTask" />
-
     <preference name="Orientation" value="portrait" />
-
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#04558a" />
-
+    
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="android-minSdkVersion" value="19" />
-
         <icon density="mdpi" src="res/icon/android/mipmap-mdpi/ic_launcher.png" />
         <icon density="hdpi" src="res/icon/android/mipmap-hdpi/ic_launcher.png" />
         <icon density="xhdpi" src="res/icon/android/mipmap-xhdpi/ic_launcher.png" />
         <icon density="xxhdpi" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" />
         <icon density="xxxhdpi" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
-
-        <splash src="res/screen/android/drawable-land-hdpi/screen.png" density="land-hdpi"/>
-        <splash src="res/screen/android/drawable-land-ldpi/screen.png" density="land-ldpi"/>
-        <splash src="res/screen/android/drawable-land-mdpi/screen.png" density="land-mdpi"/>
-        <splash src="res/screen/android/drawable-land-xhdpi/screen.png" density="land-xhdpi"/>
-        <splash src="res/screen/android/drawable-land-xxhdpi/screen.png" density="land-xxhdpi"/>
-        <splash src="res/screen/android/drawable-land-xxxhdpi/screen.png" density="land-xxxhdpi"/>
-
-        <splash src="res/screen/android/drawable-port-hdpi/screen.png" density="port-hdpi"/>
-        <splash src="res/screen/android/drawable-port-ldpi/screen.png" density="port-ldpi"/>
-        <splash src="res/screen/android/drawable-port-mdpi/screen.png" density="port-mdpi"/>
-        <splash src="res/screen/android/drawable-port-xhdpi/screen.png" density="port-xhdpi"/>
-        <splash src="res/screen/android/drawable-port-xxhdpi/screen.png" density="port-xxhdpi"/>
-        <splash src="res/screen/android/drawable-port-xxxhdpi/screen.png" density="port-xxxhdpi"/>
+        <splash density="land-hdpi" src="res/screen/android/drawable-land-hdpi/screen.png" />
+        <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi/screen.png" />
+        <splash density="land-mdpi" src="res/screen/android/drawable-land-mdpi/screen.png" />
+        <splash density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi/screen.png" />
+        <splash density="land-xxhdpi" src="res/screen/android/drawable-land-xxhdpi/screen.png" />
+        <splash density="land-xxxhdpi" src="res/screen/android/drawable-land-xxxhdpi/screen.png" />
+        <splash density="port-hdpi" src="res/screen/android/drawable-port-hdpi/screen.png" />
+        <splash density="port-ldpi" src="res/screen/android/drawable-port-ldpi/screen.png" />
+        <splash density="port-mdpi" src="res/screen/android/drawable-port-mdpi/screen.png" />
+        <splash density="port-xhdpi" src="res/screen/android/drawable-port-xhdpi/screen.png" />
+        <splash density="port-xxhdpi" src="res/screen/android/drawable-port-xxhdpi/screen.png" />
+        <splash density="port-xxxhdpi" src="res/screen/android/drawable-port-xxxhdpi/screen.png" />
     </platform>
 
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        
         <preference name="WKWebViewOnly" value="true" />
-
         <feature name="CDVWKWebViewEngine">
             <param name="ios-package" value="CDVWKWebViewEngine" />
         </feature>
@@ -59,39 +52,39 @@
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
             <string>need camera access to scan QR code</string>
         </edit-config>
-
-        <icon src="res/icon/ios/icon.png" width="57" height="57" />
-        <icon src="res/icon/ios/icon@2x.png" width="114" height="114" />
-        <icon src="res/icon/ios/icon-40.png" width="40" height="40" />
-        <icon src="res/icon/ios/icon-40@2x.png" width="80" height="80" />
-        <icon src="res/icon/ios/icon-50.png" width="50" height="50" />
-        <icon src="res/icon/ios/icon-50@2x.png" width="100" height="100" />
-        <icon src="res/icon/ios/icon-60@2x.png" width="120" height="120" />
-        <icon src="res/icon/ios/icon-60@3x.png" width="180" height="180" />
-        <icon src="res/icon/ios/icon-72.png" width="72" height="72" />
-        <icon src="res/icon/ios/icon-72@2x.png" width="144" height="144" />
-        <icon src="res/icon/ios/icon-76.png" width="76" height="76" />
-        <icon src="res/icon/ios/icon-76@2x.png" width="152" height="152" />
-        <icon src="res/icon/ios/icon-83.5@2x.png" width="167" height="167" />
-        <icon src="res/icon/ios/icon-small.png" width="29" height="29" />
-        <icon src="res/icon/ios/icon-small@2x.png" width="58" height="58" />
-        <icon src="res/icon/ios/icon-small@3x.png" width="87" height="87" />
-
-        <splash src="res/screen/ios/Default~iphone.png" width="320" height="480"/>
-        <splash src="res/screen/ios/Default@2x~iphone.png" width="640" height="960"/>
-        <splash src="res/screen/ios/Default-Portrait~ipad.png" width="768" height="1024"/>
-        <splash src="res/screen/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048"/>
-        <splash src="res/screen/ios/Default-Landscape~ipad.png" width="1024" height="768"/>
-        <splash src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
-        <splash src="res/screen/ios/Default-568h@2x~iphone.png" width="640" height="1136"/>
-        <splash src="res/screen/ios/Default-667h.png" width="750" height="1334"/>
-        <splash src="res/screen/ios/Default-736h.png" width="1242" height="2208"/>
+        <icon height="57" src="res/icon/ios/icon.png" width="57" />
+        <icon height="114" src="res/icon/ios/icon@2x.png" width="114" />
+        <icon height="40" src="res/icon/ios/icon-40.png" width="40" />
+        <icon height="80" src="res/icon/ios/icon-40@2x.png" width="80" />
+        <icon height="50" src="res/icon/ios/icon-50.png" width="50" />
+        <icon height="100" src="res/icon/ios/icon-50@2x.png" width="100" />
+        <icon height="120" src="res/icon/ios/icon-60@2x.png" width="120" />
+        <icon height="180" src="res/icon/ios/icon-60@3x.png" width="180" />
+        <icon height="72" src="res/icon/ios/icon-72.png" width="72" />
+        <icon height="144" src="res/icon/ios/icon-72@2x.png" width="144" />
+        <icon height="76" src="res/icon/ios/icon-76.png" width="76" />
+        <icon height="152" src="res/icon/ios/icon-76@2x.png" width="152" />
+        <icon height="167" src="res/icon/ios/icon-83.5@2x.png" width="167" />
+        <icon height="29" src="res/icon/ios/icon-small.png" width="29" />
+        <icon height="58" src="res/icon/ios/icon-small@2x.png" width="58" />
+        <icon height="87" src="res/icon/ios/icon-small@3x.png" width="87" />
+        <splash height="480" src="res/screen/ios/Default~iphone.png" width="320" />
+        <splash height="960" src="res/screen/ios/Default@2x~iphone.png" width="640" />
+        <splash height="1024" src="res/screen/ios/Default-Portrait~ipad.png" width="768" />
+        <splash height="2048" src="res/screen/ios/Default-Portrait@2x~ipad.png" width="1536" />
+        <splash height="768" src="res/screen/ios/Default-Landscape~ipad.png" width="1024" />
+        <splash height="1536" src="res/screen/ios/Default-Landscape@2x~ipad.png" width="2048" />
+        <splash height="1136" src="res/screen/ios/Default-568h@2x~iphone.png" width="640" />
+        <splash height="1334" src="res/screen/ios/Default-667h.png" width="750" />
+        <splash height="2208" src="res/screen/ios/Default-736h.png" width="1242" />
     </platform>
-    
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-dialogs" spec="~2.0.2" />
-    <plugin name="cordova-plugin-qrscanner" spec="~3.0.1" />
-    <plugin name="cordova-plugin-permission" spec="~0.1.0" />
-    <plugin name="cordova-plugin-statusbar" spec="~2.4.3" />
-    <plugin name="cordova-plugin-wkwebview-engine" spec="~1.2.1" />
+
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.4" />
+    <plugin name="cordova-plugin-dialogs" spec="^2.0.2" />
+    <plugin name="cordova-plugin-qrscanner" spec="^3.0.1" />
+    <plugin name="cordova-plugin-permission" spec="^0.1.0" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.3" />
+    <plugin name="cordova-plugin-wkwebview-engine" spec="^1.2.1" />
+    <plugin name="cordova-plugin-splashscreen" spec="~6.0.0" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.2" />
 </widget>

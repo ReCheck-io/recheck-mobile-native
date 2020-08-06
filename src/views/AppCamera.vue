@@ -10,7 +10,7 @@
     <div class="guides" v-if="pinned">
       <div class="info-text">
         <h2>Scan QR Code</h2>
-        <p>Scan the QR code from My ReCheck</p>
+        <p>Scan the QR code from ipOcean</p>
       </div>
       <img class="qr-scan-guides" src="../assets/scan.png">
     </div>
