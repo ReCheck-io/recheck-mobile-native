@@ -2,6 +2,7 @@
   <v-container class="py-0">
     <recheck-scanner
       classes="my-styles"
+      appRequestId="ipOceanMobile"
       @scan-result="handleResult"
       :handledByComponent="true"
       :useIntegratedCamera="false"

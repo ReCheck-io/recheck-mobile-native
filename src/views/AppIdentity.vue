@@ -1,6 +1,11 @@
 <template>
   <v-container class="py-0">
-    <recheck-identity ref="id" :mobileBackup="true" classes="my-styles" />
+    <recheck-identity
+      ref="id"
+      appName="ipOcean"
+      :mobileBackup="true"
+      classes="my-styles"
+    />
 
     <div v-if="pinned && backupMode" class="backup-identity my-styles">
       <card v-if="showInfoStep">
