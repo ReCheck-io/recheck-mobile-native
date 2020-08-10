@@ -9,7 +9,7 @@
     v-model="activeBtn"
     :input-value="showNav"
   >
-    <v-btn to="/scan" value="Camera">
+    <v-btn to="/scan" value="Camera" @click="userInfo">
       <span>Scan</span>
       <v-icon>mdi-qrcode-scan</v-icon>
     </v-btn>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import router from '@/router';
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
 
 export default {
@@ -43,5 +44,21 @@ export default {
       this.showNav = res;
     });
   },
+
+  methods: {
+    userInfo() {
+      if (!chainClient.pinned()) {
+        const redirectFromScan = router.currentRoute.query?.redirect
+          && router.currentRoute.query?.redirect === '/scan';
+        if (redirectFromScan) {
+          this.$root.$emit(
+            'alertOn',
+            'Please finish Identity creation before using Camera',
+            'red'
+          );
+        }
+      }
+    }
+  }
 };
 </script>

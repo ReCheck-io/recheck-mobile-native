@@ -52,10 +52,10 @@ router.beforeEach((to, from, next) => {
     window.QRScanner.hide((status) => console.log(status));
   }
 
-  if (!chainClient.pinned() && to.path !== '/identity') {
+  if (!chainClient.pinned() && !['/identity', '/'].includes(to.path)) {
     next({
       path: '/identity',
-      query: { redirect: to.fullPath }
+      query: { redirect: to.path }
     });
   } else {
     next();
