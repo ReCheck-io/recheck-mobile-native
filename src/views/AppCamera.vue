@@ -1,10 +1,12 @@
 <template>
   <v-container class="py-0">
     <recheck-scanner
-      classes="my-styles"
       @scan-result="handleResult"
-      :handledByComponent="true"
-      :useIntegratedCamera="false"
+      :useIntegratedCamera="useIntegratedCamera"
+      :handledByComponent="handledByComponent"
+      appRequestId="ReCheckAPP"
+      classes="my-styles"
+      ref="camera"
     />
 
     <div class="guides" v-if="pinned">
@@ -21,7 +23,7 @@
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
 
 export default {
-  name: 'AppHome',
+  name: 'AppCamera',
 
   data() {
     return {
@@ -29,12 +31,19 @@ export default {
       isBackupDone: false,
       handledByComponent: true,
       useIntegratedCamera: false,
+
+      omitCamera: this.$route.query.omitCamera,
+      scanUrl: this.$route.query.scanUrl,
     };
   },
 
   mounted() {
     this.pinned = chainClient.pinned();
     this.inputFocusListeners();
+
+    if (chainClient.pinned() && this.omitCamera && this.scanUrl) {
+      this.$refs.camera.onDecode(this.scanUrl);
+    }
   },
 
   methods: {

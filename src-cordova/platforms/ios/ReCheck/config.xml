@@ -35,6 +35,10 @@
     <feature name="NetworkStatus">
         <param name="ios-package" value="CDVConnection" />
     </feature>
+    <feature name="UniversalLinks">
+        <param name="ios-package" value="CULPlugin" />
+        <param name="onload" value="true" />
+    </feature>
     <name>ReCheck</name>
     <description>ReCheck - ReCheck's native mobile app.</description>
     <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
@@ -47,6 +51,12 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <universal-links>
+        <host event="qrScan" name="*.recheck.io" scheme="https">
+            <path url="/login/*" />
+            <path url="/data/*:*" />
+        </host>
+    </universal-links>
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">

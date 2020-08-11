@@ -24,6 +24,10 @@
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
     </feature>
+    <feature name="UniversalLinks">
+        <param name="android-package" value="com.nordnetab.cordova.ul.UniversalLinksPlugin" />
+        <param name="onload" value="true" />
+    </feature>
     <name>ReCheck</name>
     <description>ReCheck - ReCheck's native mobile app.</description>
     <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
@@ -36,6 +40,12 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <universal-links>
+        <host event="qrScan" name="*.recheck.io" scheme="https">
+            <path url="/login/*" />
+            <path url="/data/*:*" />
+        </host>
+    </universal-links>
     <allow-intent href="market:*" />
     <icon density="mdpi" src="res/icon/android/mipmap-mdpi/ic_launcher.png" />
     <icon density="hdpi" src="res/icon/android/mipmap-hdpi/ic_launcher.png" />

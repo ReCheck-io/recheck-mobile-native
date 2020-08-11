@@ -35,6 +35,10 @@
             {
               "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"UniversalLinks\"><param name=\"android-package\" value=\"com.nordnetab.cordova.ul.UniversalLinksPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -86,6 +90,9 @@
       "PACKAGE_NAME": "io.recheck.android"
     },
     "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "io.recheck.android"
+    },
+    "cordova-plugin-deeplinks": {
       "PACKAGE_NAME": "io.recheck.android"
     }
   },
@@ -160,6 +167,14 @@
       "clobbers": [
         "Connection"
       ]
+    },
+    {
+      "id": "cordova-plugin-deeplinks.universalLinks",
+      "file": "plugins/cordova-plugin-deeplinks/www/universal_links.js",
+      "pluginId": "cordova-plugin-deeplinks",
+      "clobbers": [
+        "universalLinks"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -170,6 +185,7 @@
     "cordova-plugin-statusbar": "2.4.3",
     "cordova-plugin-wkwebview-engine": "1.2.1",
     "cordova-plugin-splashscreen": "6.0.0",
-    "cordova-plugin-network-information": "2.0.2"
+    "cordova-plugin-network-information": "2.0.2",
+    "cordova-plugin-deeplinks": "1.1.1"
   }
 }

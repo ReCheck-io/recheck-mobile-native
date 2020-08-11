@@ -70,5 +70,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-deeplinks": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/e-imaxina/cordova-plugin-deeplinks.git"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

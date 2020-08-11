@@ -1,6 +1,11 @@
 <template>
   <v-container class="py-0">
-    <recheck-identity ref="id" :mobileBackup="true" classes="my-styles" />
+    <recheck-identity
+      :mobileBackup="mobileBackup"
+      appName="My ReCheck"
+      classes="my-styles"
+      ref="id"
+    />
 
     <div v-if="pinned && backupMode" class="backup-identity my-styles">
       <card v-if="showInfoStep">
@@ -118,6 +123,7 @@ export default {
   data() {
     return {
       pinned: false,
+      mobileBackup: true,
       isBackupDone: false,
 
       backupMode: false,

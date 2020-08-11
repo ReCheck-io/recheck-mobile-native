@@ -29,6 +29,18 @@ const initApp = () => {
         if (!chainClient.pinned()) {
           router.push('/identity');
         } else {
+          window.universalLinks.subscribe('qrScan', (eventData) => {
+            router.push(
+              {
+                path: '/scan',
+                query: {
+                  omitCamera: true,
+                  scanUrl: eventData.url
+                }
+              }
+            );
+          });
+
           router.push('/scan');
         }
       },

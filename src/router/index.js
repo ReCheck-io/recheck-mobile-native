@@ -25,7 +25,7 @@ const router = new Router({
   routes: [
     {
       name: 'About',
-      path: '/',
+      path: '/about',
       component: AppAbout,
     },
     {
@@ -40,7 +40,7 @@ const router = new Router({
     },
     {
       path: '*',
-      redirect: '/',
+      redirect: '/identity',
     },
   ],
 });
@@ -52,11 +52,15 @@ router.beforeEach((to, from, next) => {
     window.QRScanner.hide((status) => console.log(status));
   }
 
-  if (!chainClient.pinned() && to.path !== '/identity') {
-    next({
-      path: '/identity',
-      query: { redirect: to.fullPath }
-    });
+  if (!chainClient.pinned() && !['/identity', '/'].includes(to.path)) {
+    next(
+      {
+        path: '/identity',
+        query: {
+          redirect: to.fullPath
+        }
+      }
+    );
   } else {
     next();
   }

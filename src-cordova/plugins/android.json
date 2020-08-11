@@ -30,6 +30,9 @@
     },
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "io.recheck.android"
+    },
+    "cordova-plugin-deeplinks": {
+      "PACKAGE_NAME": "io.recheck.android"
     }
   },
   "dependent_plugins": {}
