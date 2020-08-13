@@ -58,9 +58,6 @@
     }
   },
   "installed_plugins": {
-    "cordova-plugin-add-swift-support": {
-      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
-    },
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
@@ -68,6 +65,9 @@
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-permission": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-add-swift-support": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-qrscanner": {
@@ -160,10 +160,10 @@
     }
   ],
   "plugin_metadata": {
-    "cordova-plugin-add-swift-support": "2.0.2",
     "cordova-plugin-dialogs": "2.0.2",
     "cordova-plugin-network-information": "2.0.2",
     "cordova-plugin-permission": "0.1.0",
+    "cordova-plugin-add-swift-support": "2.0.2",
     "cordova-plugin-qrscanner": "3.0.1",
     "cordova-plugin-splashscreen": "6.0.0",
     "cordova-plugin-statusbar": "2.4.3",

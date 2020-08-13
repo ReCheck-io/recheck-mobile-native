@@ -7,34 +7,30 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.ipocean.android"
+    },
     "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.ipocean.android"
-    },
-    "cordova-plugin-network-information": {
-      "PACKAGE_NAME": "com.ipocean.android"
-    },
-    "cordova-plugin-permission": {
       "PACKAGE_NAME": "com.ipocean.android"
     },
     "cordova-plugin-qrscanner": {
       "PACKAGE_NAME": "com.ipocean.android"
     },
-    "cordova-plugin-splashscreen": {
+    "cordova-plugin-permission": {
       "PACKAGE_NAME": "com.ipocean.android"
     },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.ipocean.android"
     },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-wkwebview-engine": {
       "PACKAGE_NAME": "com.ipocean.android"
     },
-    "cordova-plugin-wkwebview-engine": {
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.ipocean.android"
+    },
+    "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.ipocean.android"
     }
   },
-  "dependent_plugins": {
-    "cordova-plugin-add-swift-support": {
-      "PACKAGE_NAME": "com.ipocean.android"
-    }
-  }
+  "dependent_plugins": {}
 }
