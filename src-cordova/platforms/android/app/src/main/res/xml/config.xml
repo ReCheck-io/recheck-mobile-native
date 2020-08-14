@@ -1,31 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-packageName="io.recheck.android" id="io.recheck" ios-CFBundleIdentifier="io.recheck" version="1.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="Whitelist">
-        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+    <feature name="UniversalLinks">
+        <param name="android-package" value="com.nordnetab.cordova.ul.UniversalLinksPlugin" />
         <param name="onload" value="true" />
     </feature>
     <feature name="Notification">
         <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
     </feature>
-    <feature name="QRScanner">
-        <param name="android-package" value="com.bitpay.cordova.qrscanner.QRScanner" />
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
     </feature>
     <feature name="Permission">
         <param name="android-package" value="com.adrianodigiovanni.permission.CDVPermission" />
     </feature>
-    <feature name="StatusBar">
-        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
-        <param name="onload" value="true" />
+    <feature name="QRScanner">
+        <param name="android-package" value="com.bitpay.cordova.qrscanner.QRScanner" />
     </feature>
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="NetworkStatus">
-        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
     </feature>
-    <feature name="UniversalLinks">
-        <param name="android-package" value="com.nordnetab.cordova.ul.UniversalLinksPlugin" />
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
     <name>ReCheck</name>
@@ -47,23 +47,23 @@
         </host>
     </universal-links>
     <allow-intent href="market:*" />
-    <icon density="mdpi" src="res/icon/android/mipmap-mdpi/ic_launcher.png" />
-    <icon density="hdpi" src="res/icon/android/mipmap-hdpi/ic_launcher.png" />
-    <icon density="xhdpi" src="res/icon/android/mipmap-xhdpi/ic_launcher.png" />
-    <icon density="xxhdpi" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" />
-    <icon density="xxxhdpi" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
-    <splash density="land-hdpi" src="res/screen/android/drawable-land-hdpi/screen.png" />
-    <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi/screen.png" />
-    <splash density="land-mdpi" src="res/screen/android/drawable-land-mdpi/screen.png" />
-    <splash density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi/screen.png" />
-    <splash density="land-xxhdpi" src="res/screen/android/drawable-land-xxhdpi/screen.png" />
-    <splash density="land-xxxhdpi" src="res/screen/android/drawable-land-xxxhdpi/screen.png" />
-    <splash density="port-hdpi" src="res/screen/android/drawable-port-hdpi/screen.png" />
-    <splash density="port-ldpi" src="res/screen/android/drawable-port-ldpi/screen.png" />
-    <splash density="port-mdpi" src="res/screen/android/drawable-port-mdpi/screen.png" />
-    <splash density="port-xhdpi" src="res/screen/android/drawable-port-xhdpi/screen.png" />
-    <splash density="port-xxhdpi" src="res/screen/android/drawable-port-xxhdpi/screen.png" />
-    <splash density="port-xxxhdpi" src="res/screen/android/drawable-port-xxxhdpi/screen.png" />
+    <icon density="mdpi" src="resources/icon/android/mipmap-mdpi/ic_launcher.png" />
+    <icon density="hdpi" src="resources/icon/android/mipmap-hdpi/ic_launcher.png" />
+    <icon density="xhdpi" src="resources/icon/android/mipmap-xhdpi/ic_launcher.png" />
+    <icon density="xxhdpi" src="resources/icon/android/mipmap-xxhdpi/ic_launcher.png" />
+    <icon density="xxxhdpi" src="resources/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
+    <splash density="land-hdpi" src="resources/screen/android/drawable-land-hdpi/screen.png" />
+    <splash density="land-ldpi" src="resources/screen/android/drawable-land-ldpi/screen.png" />
+    <splash density="land-mdpi" src="resources/screen/android/drawable-land-mdpi/screen.png" />
+    <splash density="land-xhdpi" src="resources/screen/android/drawable-land-xhdpi/screen.png" />
+    <splash density="land-xxhdpi" src="resources/screen/android/drawable-land-xxhdpi/screen.png" />
+    <splash density="land-xxxhdpi" src="resources/screen/android/drawable-land-xxxhdpi/screen.png" />
+    <splash density="port-hdpi" src="resources/screen/android/drawable-port-hdpi/screen.png" />
+    <splash density="port-ldpi" src="resources/screen/android/drawable-port-ldpi/screen.png" />
+    <splash density="port-mdpi" src="resources/screen/android/drawable-port-mdpi/screen.png" />
+    <splash density="port-xhdpi" src="resources/screen/android/drawable-port-xhdpi/screen.png" />
+    <splash density="port-xxhdpi" src="resources/screen/android/drawable-port-xxhdpi/screen.png" />
+    <splash density="port-xxxhdpi" src="resources/screen/android/drawable-port-xxxhdpi/screen.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="Orientation" value="portrait" />

@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "<YOUR_TEAM_ID_FROM_MEMBER_CENTER>.io.recheck",
+        "appID": "3J5QS4D2V3.io.recheck",
         "paths": [
           "/login/*",
           "/data/*:*"

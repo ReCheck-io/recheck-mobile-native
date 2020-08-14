@@ -21,13 +21,24 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.10</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>need camera access to scan QR code</string>
 	<key>NSMainNibFile</key>
-	<string/>
+	<string></string>
 	<key>NSMainNibFile~ipad</key>
-	<string/>
+	<string></string>
+	<key>UIInterfaceOrientation</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
@@ -40,16 +51,5 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>UIInterfaceOrientation</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>need camera access to scan QR code</string>
 </dict>
 </plist>
