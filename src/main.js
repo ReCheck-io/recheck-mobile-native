@@ -51,6 +51,7 @@ const initApp = () => {
       }
     },
     mounted() {
+      chainClient.setURLandNetwork('', process.env.VUE_APP_NETWORK);
       this.checkConnection();
     }
   }).$mount('#app');
