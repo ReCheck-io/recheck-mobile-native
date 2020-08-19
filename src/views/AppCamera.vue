@@ -42,6 +42,7 @@ export default {
     this.inputFocusListeners();
 
     if (chainClient.pinned() && this.omitCamera && this.scanUrl) {
+      this.$refs.camera.setupCamera();
       this.$refs.camera.onDecode(this.scanUrl);
     }
   },

@@ -22,7 +22,7 @@
             Cancel
           </button>
           <button type="button" class="btn btn-primary" @click="showPrivateKey">
-            Show Recovery Phrase
+            Show Phrase
           </button>
         </template>
       </card>
@@ -55,7 +55,7 @@
             Cancel
           </button>
           <button type="button" class="btn btn-primary" @click="showVerifyPrivateKey">
-            Verify Recovery Phrase
+            Verify Phrase
           </button>
         </template>
       </card>
@@ -192,10 +192,16 @@ export default {
             card.classList.remove('do-backup');
           }
         } else {
+          this.splittedPrivateKey = this.splittedPrivateKey.concat(this.selectedKeys);
+          this.splittedPrivateKey.sort();
+          this.selectedKeys = [];
           this.$root.$emit('alertOn', 'Opps! Not correct order, try again', 'red');
         }
         this.$root.$emit('loaderOff');
       } else {
+        this.splittedPrivateKey = this.splittedPrivateKey.concat(this.selectedKeys);
+        this.splittedPrivateKey.sort();
+        this.selectedKeys = [];
         this.$root.$emit(
           'alertOn',
           'The secret phrase have to be 12 words.',

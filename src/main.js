@@ -41,7 +41,11 @@ const initApp = () => {
             );
           });
 
-          router.push('/scan');
+          if (window.lastPage) {
+            router.push(window.lastPage);
+          } else {
+            router.push('/scan');
+          }
         }
       },
       checkConnection() {
@@ -63,6 +67,7 @@ const initApp = () => {
       }
     },
     mounted() {
+      chainClient.setURLandNetwork('', process.env.VUE_APP_NETWORK);
       this.checkConnection();
     }
   }).$mount('#app');
@@ -77,6 +82,14 @@ document.addEventListener('deviceready', () => {
   });
 
   initApp();
+
+  document.addEventListener('pause', () => {
+    window.lastPage = router.currentRoute.path;
+  }, false);
+  document.addEventListener('resume', () => {
+    console.log(window.lastPage);
+    this.checkConnection();
+  }, false);
 });
 
 // If we are not in Cordova, manually trigger the deviceready event
