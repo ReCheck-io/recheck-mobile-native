@@ -75,19 +75,19 @@ const initApp = () => {
 
 // Wait for the deviceready event to start the render
 document.addEventListener('deviceready', () => {
+  initApp();
+
   window.QRScanner.getStatus((status) => {
     if (!status.prepared) {
       window.QRScanner.prepare();
     }
   });
 
-  initApp();
-
   document.addEventListener('pause', () => {
     window.lastPage = router.currentRoute.path;
   }, false);
+
   document.addEventListener('resume', () => {
-    console.log(window.lastPage);
     this.checkConnection();
   }, false);
 });
