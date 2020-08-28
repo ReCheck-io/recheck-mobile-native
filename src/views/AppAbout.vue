@@ -1,29 +1,37 @@
 <template>
   <v-card flat tile>
     <v-card-text>
-      <h2 class="mt-1 mb-5 text-center">About My Recheck</h2>
+      <h2 class="mt-1 mb-5 text-center">About My ReCheck</h2>
       <p>
-        My ReCheck is a game changer that helps you protect your data, share it
-        with ultimate privacy and manage all interactions with the files.
-        This is an all-in-one solution for bulletproof information exchange
-        and secure data management.
-        <br />
-        <br />
+        <b>Freedom and safety in the digital world</b>
+      </p>
+      <p>
+        My ReCheck helps you protect your data, share it with ultimate privacy
+        and see all interactions with the files. This is an all-in-one solution
+        for bulletproof information exchange and electronic signing.
+      </p>
+      <p>
         With My ReCheck you are in control of your digital identity and only you
         can access your valuable digital content. No one can track you online
-        and data tampering, fraud or spam are successfully avoided.
-        <br />
-        <br />
-        Most importantly, you will enjoy verifiable digital proofs
-        (ReCheck Certificates) that your data existed, was shared or signed
-        exactly at a specific point in time. The certificates will help you in
-        case of disputes, fraudulent activities or lawsuits.
+        and data tampering or fraud are successfully avoided.
+      </p>
+      <p>
+        The service creates verifiable digital proofs (ReCheck certificates)
+        that your data existed, was shared or signed exactly at a specific point
+        in time. The certificates will help you in case of disputes or lawsuits.
+      </p>
+      <p>
+        Start by opening my.recheck.io on your computer and use the mobile app
+        to scan the QR and authenticate.
       </p>
 
       <p class="d-flex justify-space-around my-3">
         <a href="http://recheck.io/faq/" target="_blank">FAQ</a>
         <a href="https://recheck.io/contact-us/" target="_blank">Contact Us</a>
-        <a href="https://recheck.io/privacy-policy-terms-of-use/" target="_blank">
+        <a
+          href="https://recheck.io/privacy-policy-terms-of-use/"
+          target="_blank"
+        >
           Terms and Privacy Policy
         </a>
       </p>
@@ -40,9 +48,9 @@ export default {
 
   data() {
     return {
-      currentYear: new Date().getFullYear()
+      currentYear: new Date().getFullYear(),
     };
-  }
+  },
 };
 </script>
 

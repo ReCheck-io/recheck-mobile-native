@@ -9,13 +9,19 @@
 
     <div v-if="pinned && backupMode" class="backup-identity my-styles">
       <card v-if="showInfoStep">
-        <template #header>Backup Identity</template>
+        <template #header>Backup ReCheck Identity</template>
         <p>
-          Your recovery phrase (also referred as private key) serves as the keys or
-          a password to access your account. Never disclose this to anyone and make
-          sure you back it up on a piece of paper that no one else can see - but
-          that you will never lose. Losing these keys means losing access to your
-          ReCheck Identity.
+          Your recovery phrase (also referred to as a private key) is at the
+          core of your identity. This is a secret set of words that give you an
+          actual control and ownership over your ReCheck identity. With this
+          phrase you can recover your identity on any device where ReCheck
+          mobile app is installed.
+        </p>
+        <p>
+          Never disclose your recovery phrase to anyone and make sure you back
+          it up on a piece of paper that no one else can see - but that you will
+          never lose. Losing this set of words means losing access to your
+          ReCheck identity and all data created with it.
         </p>
         <template #footer>
           <button type="button" class="btn" @click="cancelBackupMode">
@@ -28,13 +34,13 @@
       </card>
 
       <card v-else-if="showPrivateKeyStep">
-        <template #header>Your Recover Phrase</template>
+        <template #header>Your Recovery Phrase</template>
         <div class="privateKey">
           <p class="block">
             <b>{{ privateKey }}</b>
             <br />
             <button type="button" @click="copyString(privateKey)">
-              <img src="../assets/copy.svg" alt="Copy icon svg">
+              <img src="../assets/copy.svg" alt="Copy icon svg" />
               Click to copy
             </button>
           </p>
@@ -54,14 +60,18 @@
           <button type="button" class="btn" @click="cancelBackupMode">
             Cancel
           </button>
-          <button type="button" class="btn btn-primary" @click="showVerifyPrivateKey">
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="showVerifyPrivateKey"
+          >
             Verify Phrase
           </button>
         </template>
       </card>
 
       <card v-else-if="verifyPrivateKeyStep">
-        <template #header>Your Recover Phrase</template>
+        <template #header>Your Recovery Phrase</template>
         <b>
           Confirm your recovery phrase. Tap the words below to compose your
           recovery phrase in the correct order.
@@ -97,7 +107,11 @@
           <button type="button" class="btn" @click="cancelBackupMode">
             Cancel
           </button>
-          <button type="button" class="btn btn-primary" @click="verifyPrivateKey">
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="verifyPrivateKey"
+          >
             Verify
           </button>
         </template>
@@ -163,14 +177,16 @@ export default {
     },
 
     selectKey(selectedKey) {
-      this.splittedPrivateKey = this.splittedPrivateKey
-        .filter((key) => key !== selectedKey);
+      this.splittedPrivateKey = this.splittedPrivateKey.filter(
+        (key) => key !== selectedKey
+      );
       this.selectedKeys.push(selectedKey);
     },
 
     deselectKey(selectedKey) {
-      this.selectedKeys = this.selectedKeys
-        .filter((key) => key !== selectedKey);
+      this.selectedKeys = this.selectedKeys.filter(
+        (key) => key !== selectedKey
+      );
       this.splittedPrivateKey.push(selectedKey);
     },
 
@@ -180,7 +196,11 @@ export default {
       if (key.length === 12) {
         this.$root.$emit('loaderOn');
         if (this.privateKey === key.join(' ')) {
-          this.$root.$emit('alertOn', 'Identity backed up successfully!', 'green');
+          this.$root.$emit(
+            'alertOn',
+            'Identity backed up successfully!',
+            'green'
+          );
           this.cancelBackupMode();
 
           localStorage.setItem('backupDone', true);
@@ -188,18 +208,29 @@ export default {
           this.$refs.id.backupDone = true;
 
           const card = document.querySelector('.card');
-          if (this.backupDone === true && card.classList.contains('do-backup')) {
+          if (
+            this.backupDone === true
+            && card.classList.contains('do-backup')
+          ) {
             card.classList.remove('do-backup');
           }
         } else {
-          this.splittedPrivateKey = this.splittedPrivateKey.concat(this.selectedKeys);
+          this.splittedPrivateKey = this.splittedPrivateKey.concat(
+            this.selectedKeys
+          );
           this.splittedPrivateKey.sort();
           this.selectedKeys = [];
-          this.$root.$emit('alertOn', 'Opps! Not correct order, try again', 'red');
+          this.$root.$emit(
+            'alertOn',
+            'Opps! Not correct order, try again',
+            'red'
+          );
         }
         this.$root.$emit('loaderOff');
       } else {
-        this.splittedPrivateKey = this.splittedPrivateKey.concat(this.selectedKeys);
+        this.splittedPrivateKey = this.splittedPrivateKey.concat(
+          this.selectedKeys
+        );
         this.splittedPrivateKey.sort();
         this.selectedKeys = [];
         this.$root.$emit(
@@ -228,7 +259,7 @@ export default {
         input.addEventListener('focusin', () => this.$root.$emit('focusin', false));
         input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
       });
-    }
+    },
   },
 };
 </script>
@@ -301,7 +332,7 @@ export default {
     }
 
     button {
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       font-size: 14px;
       font-weight: 600;
       margin-top: 12px;

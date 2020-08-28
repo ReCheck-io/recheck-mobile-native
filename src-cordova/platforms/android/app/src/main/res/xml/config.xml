@@ -32,7 +32,8 @@
     <description>ReCheck - ReCheck's native mobile app.</description>
     <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
     <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
-    <content src="index.html" />
+    <content src="https://172.16.1.248:8080" />
+    <allow-navigation href="https://172.16.1.248:8080" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

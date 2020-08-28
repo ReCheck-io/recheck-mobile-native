@@ -12,7 +12,7 @@
     <div class="guides" v-if="pinned">
       <div class="info-text">
         <h2>Scan QR Code</h2>
-        <p>Scan the QR code from My ReCheck</p>
+        <p>Open my.recheck.io on your computer and scan the QR</p>
       </div>
       <img class="qr-scan-guides" src="../assets/scan.png">
     </div>
@@ -104,8 +104,11 @@ export default {
   .info-text {
     color: #fff;
     text-align: center;
-    margin-top: -54px;
+    margin-top: -74px;
     margin-bottom: 56px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: rgba(0,0,0, 0.7);
 
     p {
       margin-bottom: 0;
