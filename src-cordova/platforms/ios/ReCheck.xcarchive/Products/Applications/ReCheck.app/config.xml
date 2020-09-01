@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-packageName="io.recheck.android" id="io.recheck" ios-CFBundleIdentifier="io.recheck" version="1.0.11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="LocalStorage">
+        <param name="ios-package" value="CDVLocalStorage" />
+    </feature>
+    <feature name="Console">
+        <param name="ios-package" value="CDVLogger" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="HandleOpenUrl">
+        <param name="ios-package" value="CDVHandleOpenURL" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="IntentAndNavigationFilter">
+        <param name="ios-package" value="CDVIntentAndNavigationFilter" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="GestureHandler">
+        <param name="ios-package" value="CDVGestureHandler" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="UniversalLinks">
+        <param name="ios-package" value="CULPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Notification">
+        <param name="ios-package" value="CDVNotification" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="ios-package" value="CDVConnection" />
+    </feature>
+    <feature name="QRScanner">
+        <param name="ios-package" value="QRScanner" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+    <name>ReCheck</name>
+    <description>ReCheck - ReCheck's native mobile app.</description>
+    <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
+    <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <universal-links>
+        <host event="qrScan" name="*.recheck.io" scheme="https">
+            <path url="/login/*" />
+            <path url="/data/*:*" />
+        </host>
+    </universal-links>
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>need camera access to scan QR code</string>
+    </edit-config>
+    <icon height="57" src="resources/icon/ios/icon.png" width="57" />
+    <icon height="114" src="resources/icon/ios/icon@2x.png" width="114" />
+    <icon height="40" src="resources/icon/ios/icon-40.png" width="40" />
+    <icon height="80" src="resources/icon/ios/icon-40@2x.png" width="80" />
+    <icon height="50" src="resources/icon/ios/icon-50.png" width="50" />
+    <icon height="100" src="resources/icon/ios/icon-50@2x.png" width="100" />
+    <icon height="120" src="resources/icon/ios/icon-60@2x.png" width="120" />
+    <icon height="180" src="resources/icon/ios/icon-60@3x.png" width="180" />
+    <icon height="72" src="resources/icon/ios/icon-72.png" width="72" />
+    <icon height="144" src="resources/icon/ios/icon-72@2x.png" width="144" />
+    <icon height="76" src="resources/icon/ios/icon-76.png" width="76" />
+    <icon height="152" src="resources/icon/ios/icon-76@2x.png" width="152" />
+    <icon height="167" src="resources/icon/ios/icon-83.5@2x.png" width="167" />
+    <icon height="29" src="resources/icon/ios/icon-small.png" width="29" />
+    <icon height="58" src="resources/icon/ios/icon-small@2x.png" width="58" />
+    <icon height="87" src="resources/icon/ios/icon-small@3x.png" width="87" />
+    <splash height="480" src="resources/screen/ios/Default~iphone.png" width="320" />
+    <splash height="960" src="resources/screen/ios/Default@2x~iphone.png" width="640" />
+    <splash height="1024" src="resources/screen/ios/Default-Portrait~ipad.png" width="768" />
+    <splash height="2048" src="resources/screen/ios/Default-Portrait@2x~ipad.png" width="1536" />
+    <splash height="768" src="resources/screen/ios/Default-Landscape~ipad.png" width="1024" />
+    <splash height="1536" src="resources/screen/ios/Default-Landscape@2x~ipad.png" width="2048" />
+    <splash height="1136" src="resources/screen/ios/Default-568h@2x~iphone.png" width="640" />
+    <splash height="1334" src="resources/screen/ios/Default-667h.png" width="750" />
+    <splash height="2208" src="resources/screen/ios/Default-736h.png" width="1242" />
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="SuppressesLongPressGesture" value="false" />
+    <preference name="Suppresses3DTouchGesture" value="false" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="AndroidLaunchMode" value="singleTask" />
+    <preference name="Orientation" value="portrait" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#04558a" />
+    <preference name="WKWebViewOnly" value="true" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+</widget>

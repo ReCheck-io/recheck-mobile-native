@@ -1,17 +1,17 @@
 # recheck-mobile-native
 
 ### To build project you need env file
-*Each (production/development) scripts loads file for itself* <br />
-`.env.production.local` for production settings/scripts <br />
-`.env.development.local` for development settings/scripts
+*Each (production/development) script load it's env variables for itself* <br />
+`.env.production.local` for production settings <br />
+`.env.development.local` for development settings
 
-Example `.env.production.local` file:
 ```bash
-# production (logs disabled) or debug (logs enabled)
-VUE_APP_LOGGER_MODE=production
+# Example `.env.production.local` file:
 
-# api endpoint,network needed for init function
-VUE_APP_API_ENV=https://beta.recheck.io,ae
+VUE_APP_LOGGER_MODE=production              # Log status: production(disabled) - debug(enabled) (default: 'production')
+VUE_APP_NETWORK=ae                          # Blockchain Network for init function (default: 'ae')
+VUE_APP_API_URL=                            # API endpoint for init function (default: '')
+
 ```
 
 ## Project setup

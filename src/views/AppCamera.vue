@@ -1,9 +1,11 @@
 <template>
-  <v-container class="py-0">
+  <div class="camera-container px-3 py-0">
     <recheck-scanner
       @scan-result="handleResult"
       :useIntegratedCamera="useIntegratedCamera"
       :handledByComponent="handledByComponent"
+      :isCameraOmitted="isCameraOmitted"
+      :scanLink="scanLink"
       appRequestId="ReCheckAPP"
       classes="my-styles"
       ref="camera"
@@ -12,11 +14,14 @@
     <div class="guides" v-if="pinned">
       <div class="info-text">
         <h2>Scan QR Code</h2>
-        <p>Open my.recheck.io on your computer and scan the QR</p>
+        <p class="px-3">
+          Open <b>https://www.my.recheck.io</b> on your computer and scan the QR
+          Code
+        </p>
       </div>
-      <img class="qr-scan-guides" src="../assets/scan.png">
+      <img class="qr-scan-guides" src="../assets/scan.png" />
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -32,8 +37,10 @@ export default {
       handledByComponent: true,
       useIntegratedCamera: false,
 
-      omitCamera: this.$route.query.omitCamera,
-      scanUrl: this.$route.query.scanUrl,
+      isCameraOmitted: this.$route.params.omitCamera
+        ? this.$route.params.omitCamera
+        : false,
+      scanLink: this.$route.params.scanUrl ? this.$route.params.scanUrl : '',
     };
   },
 
@@ -41,10 +48,10 @@ export default {
     this.pinned = chainClient.pinned();
     this.inputFocusListeners();
 
-    if (chainClient.pinned() && this.omitCamera && this.scanUrl) {
-      this.$refs.camera.setupCamera();
-      this.$refs.camera.onDecode(this.scanUrl);
-    }
+    // Clear deep links data for next open by user
+    setTimeout(() => {
+      window.universalLinks.dpLink = null;
+    }, 1000);
   },
 
   methods: {
@@ -62,12 +69,17 @@ export default {
         input.addEventListener('focusin', () => this.$root.$emit('focusin', false));
         input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
+.camera-container {
+  width: 100%;
+  height: 100%;
+}
+
 .my-styles {
   text-align: center;
 
@@ -96,19 +108,18 @@ export default {
   justify-content: center;
   flex-direction: column;
   position: absolute;
-  height: 100%;
-  width: 100%;
+  height: inherit;
+  width: inherit;
   top: 0;
   left: 0;
 
   .info-text {
     color: #fff;
     text-align: center;
-    margin-top: -74px;
-    margin-bottom: 56px;
+    margin-top: -24px;
+    margin-bottom: 44px;
     padding-top: 8px;
     padding-bottom: 8px;
-    background-color: rgba(0,0,0, 0.7);
 
     p {
       margin-bottom: 0;

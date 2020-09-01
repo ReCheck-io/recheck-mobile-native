@@ -8,6 +8,11 @@ const AppCamera = (resolve) => {
     resolve(require('@/views/AppCamera'));
   });
 };
+const AppLinks = (resolve) => {
+  require.ensure(['@/views/AppLinks'], () => {
+    resolve(require('@/views/AppLinks'));
+  });
+};
 const AppIdentity = (resolve) => {
   require.ensure(['@/views/AppIdentity'], () => {
     resolve(require('@/views/AppIdentity'));
@@ -32,11 +37,19 @@ const router = new Router({
       name: 'Scan',
       path: '/scan',
       component: AppCamera,
+      props: true
     },
     {
       name: 'Identity',
       path: '/identity',
       component: AppIdentity,
+      props: true
+    },
+    {
+      name: 'Links',
+      path: '/links',
+      component: AppLinks,
+      props: true
     },
     {
       path: '*',

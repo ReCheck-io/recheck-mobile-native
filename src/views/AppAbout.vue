@@ -21,8 +21,9 @@
         in time. The certificates will help you in case of disputes or lawsuits.
       </p>
       <p>
-        Start by opening my.recheck.io on your computer and use the mobile app
-        to scan the QR and authenticate.
+        Start by opening
+        <a href="https://my.recheck.io">https://my.recheck.io</a> on your
+        computer and use the mobile app to scan the QR and authenticate.
       </p>
 
       <p class="d-flex justify-space-around my-3">
@@ -38,16 +39,22 @@
       <p class="text-caption text-center mt-4 mb-0" style="line-height: 1;">
         Copyright &copy; 2016 - {{ currentYear }} &mdash; ReCheck B.V.
       </p>
+      <p class="text-caption text-center mt-2 mb-0" style="line-height: 1;">
+        Version {{ pkgVersion }}
+      </p>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import pkg from '../../package.json'
+
 export default {
   name: 'AppAbout',
 
   data() {
     return {
+      pkgVersion: pkg.version,
       currentYear: new Date().getFullYear(),
     };
   },

@@ -17,6 +17,50 @@ Vue.use(VueReCheckAuthorizer);
 
 Vue.config.productionTip = false;
 
+function checkConnection() {
+  function checkPinned() {
+    if (!chainClient.pinned()) {
+      if (router.currentRoute.path !== '/identity') {
+        router.push('/identity');
+      }
+    } else {
+      window.universalLinks.subscribe('qrScan', (eventData) => {
+        router.push({
+          name: 'Links',
+          params: {
+            omitCamera: true,
+            scanUrl: eventData.url
+          }
+        });
+      });
+
+      if (window.universalLinks.dpLink !== null) {
+        if (window.lastPage && window.lastPage !== router.currentRoute.path) {
+          router.push(window.lastPage);
+        } else if (router.currentRoute.path !== '/scan') {
+          router.push('/scan');
+        }
+      }
+    }
+  }
+
+  navigator.connection.getInfo((res) => {
+    if (res !== 'none') {
+      checkPinned();
+    } else {
+      navigator.notification.confirm(
+        'No network connection.', (result) => {
+          if (result === 1) {
+            checkConnection();
+          } else if (result === 2) {
+            navigator.app.exitApp();
+          }
+        }, 'Network Status', ['Try Again', 'Cancel']
+      );
+    }
+  })
+}
+
 const initApp = () => {
   new Vue({
     store,
@@ -24,51 +68,10 @@ const initApp = () => {
     vuetify,
     render: (h) => h(App),
 
-    methods: {
-      checkPinned() {
-        if (!chainClient.pinned()) {
-          router.push('/identity');
-        } else {
-          window.universalLinks.subscribe('qrScan', (eventData) => {
-            router.push(
-              {
-                path: '/scan',
-                query: {
-                  omitCamera: true,
-                  scanUrl: eventData.url
-                }
-              }
-            );
-          });
-
-          if (window.lastPage) {
-            router.push(window.lastPage);
-          } else {
-            router.push('/scan');
-          }
-        }
-      },
-      checkConnection() {
-        navigator.connection.getInfo((res) => {
-          if (res !== 'none') {
-            this.checkPinned();
-          } else {
-            navigator.notification.confirm(
-              'No network connection.', (result) => {
-                if (result === 1) {
-                  this.checkConnection();
-                } else if (result === 2) {
-                  navigator.app.exitApp();
-                }
-              }, 'Network Status', ['Try Again', 'cancel']
-            );
-          }
-        });
-      }
-    },
+    methods: {},
     mounted() {
       chainClient.setURLandNetwork('', process.env.VUE_APP_NETWORK);
-      this.checkConnection();
+      checkConnection();
     }
   }).$mount('#app');
 };
@@ -88,7 +91,7 @@ document.addEventListener('deviceready', () => {
   }, false);
 
   document.addEventListener('resume', () => {
-    this.checkConnection();
+    checkConnection();
   }, false);
 });
 

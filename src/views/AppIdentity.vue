@@ -1,5 +1,5 @@
 <template>
-  <v-container class="py-0">
+  <div class="px-3 py-0">
     <recheck-identity
       :mobileBackup="mobileBackup"
       appName="My ReCheck"
@@ -117,7 +117,7 @@
         </template>
       </card>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>

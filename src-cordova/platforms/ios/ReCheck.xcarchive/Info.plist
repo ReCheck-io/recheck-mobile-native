@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/ReCheck.app</string>
+		<key>CFBundleIdentifier</key>
+		<string>io.recheck</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0.11</string>
+		<key>CFBundleVersion</key>
+		<string>1.0.11</string>
+		<key>SigningIdentity</key>
+		<string>Apple Development: Byurhan Beyzat (T6682449Q3)</string>
+		<key>Team</key>
+		<string>3J5QS4D2V3</string>
+	</dict>
+	<key>ArchiveVersion</key>
+	<integer>2</integer>
+	<key>CreationDate</key>
+	<date>2020-08-31T12:47:16Z</date>
+	<key>Name</key>
+	<string>ReCheck</string>
+	<key>SchemeName</key>
+	<string>ReCheck</string>
+</dict>
+</plist>
