@@ -39,16 +39,22 @@
       <p class="text-caption text-center mt-4 mb-0" style="line-height: 1;">
         Copyright &copy; {{ currentYear }} &mdash; ipOcean Global GmbH
       </p>
+      <p class="text-caption text-center mt-2 mb-0" style="line-height: 1;">
+        Version {{ pkgVersion }}
+      </p>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import pkg from '../../package.json'
+
 export default {
   name: 'AppAbout',
 
   data() {
     return {
+      pkgVersion: pkg.version,
       currentYear: new Date().getFullYear(),
     };
   },

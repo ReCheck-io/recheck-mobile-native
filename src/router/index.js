@@ -8,6 +8,11 @@ const AppCamera = (resolve) => {
     resolve(require('@/views/AppCamera'));
   });
 };
+const AppLinks = (resolve) => {
+  require.ensure(['@/views/AppLinks'], () => {
+    resolve(require('@/views/AppLinks'));
+  });
+};
 const AppIdentity = (resolve) => {
   require.ensure(['@/views/AppIdentity'], () => {
     resolve(require('@/views/AppIdentity'));
@@ -25,22 +30,30 @@ const router = new Router({
   routes: [
     {
       name: 'About',
-      path: '/',
+      path: '/about',
       component: AppAbout,
     },
     {
       name: 'Scan',
       path: '/scan',
       component: AppCamera,
+      props: true
     },
     {
       name: 'Identity',
       path: '/identity',
       component: AppIdentity,
+      props: true
+    },
+    {
+      name: 'Links',
+      path: '/links',
+      component: AppLinks,
+      props: true
     },
     {
       path: '*',
-      redirect: '/',
+      redirect: '/identity',
     },
   ],
 });
@@ -53,10 +66,14 @@ router.beforeEach((to, from, next) => {
   }
 
   if (!chainClient.pinned() && !['/identity', '/'].includes(to.path)) {
-    next({
-      path: '/identity',
-      query: { redirect: to.path }
-    });
+    next(
+      {
+        path: '/identity',
+        query: {
+          redirect: to.fullPath
+        }
+      }
+    );
   } else {
     next();
   }

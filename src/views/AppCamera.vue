@@ -1,21 +1,24 @@
 <template>
-  <v-container class="py-0">
+  <div class="camera-container px-3 py-0">
     <recheck-scanner
-      classes="my-styles"
-      appRequestId="ipOceanMobile"
       @scan-result="handleResult"
-      :handledByComponent="true"
-      :useIntegratedCamera="false"
+      :useIntegratedCamera="useIntegratedCamera"
+      :handledByComponent="handledByComponent"
+      :isCameraOmitted="isCameraOmitted"
+      :scanLink="scanLink"
+      appRequestId="ipOceanMobile"
+      classes="my-styles"
+      ref="camera"
     />
 
     <div class="guides" v-if="pinned">
       <div class="info-text">
         <h2>Scan QR Code</h2>
-        <p>Scan the QR code from ipOcean</p>
+        <p class="px-3">Scan the QR code from ipOcean</p>
       </div>
       <img class="qr-scan-guides" src="../assets/scan.png">
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -30,12 +33,22 @@ export default {
       isBackupDone: false,
       handledByComponent: true,
       useIntegratedCamera: false,
+
+      isCameraOmitted: this.$route.params.omitCamera
+        ? this.$route.params.omitCamera
+        : false,
+      scanLink: this.$route.params.scanUrl ? this.$route.params.scanUrl : '',
     };
   },
 
   mounted() {
     this.pinned = chainClient.pinned();
     this.inputFocusListeners();
+
+    // Clear deep links data for next open by user
+    setTimeout(() => {
+      window.universalLinks.dpLink = null;
+    }, 1000);
   },
 
   methods: {
@@ -59,6 +72,11 @@ export default {
 </script>
 
 <style lang="scss">
+.camera-container {
+  width: 100%;
+  height: 100%;
+}
+
 .my-styles {
   text-align: center;
 
@@ -87,16 +105,18 @@ export default {
   justify-content: center;
   flex-direction: column;
   position: absolute;
-  height: 100%;
-  width: 100%;
+  height: inherit;
+  width: inherit;
   top: 0;
   left: 0;
 
   .info-text {
     color: #fff;
     text-align: center;
-    margin-top: -54px;
-    margin-bottom: 56px;
+    margin-top: -24px;
+    margin-bottom: 44px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 
     p {
       margin-bottom: 0;

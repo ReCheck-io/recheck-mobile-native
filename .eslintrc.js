@@ -11,6 +11,10 @@ module.exports = {
     parser: 'babel-eslint',
   },
   rules: {
+    'semi': 0,
+    'prefer-const': 0,
+    'no-unused-vars': 0,
+    'no-shadow': 0,
     'no-alert': 0,
     'no-console': 0,
     'no-debugger': 0,

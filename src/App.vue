@@ -3,10 +3,10 @@
     <AppToolbar />
     <StatusOverlay />
 
-    <v-content>
+    <v-main>
       <router-view />
       <AppAlert :isBackupDone="pinned && !isBackupDone" />
-    </v-content>
+    </v-main>
 
     <AppNavbar />
   </v-app>
@@ -49,7 +49,7 @@ export default {
         if (!this.isBackupDone) {
           this.isBackupDone = true;
         }
-      }, 7000);
+      }, 6000);
     }
   },
 
