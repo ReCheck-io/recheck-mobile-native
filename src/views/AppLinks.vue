@@ -2,7 +2,7 @@
   <div class="py-0">
     <div class="content">
       <img src="../assets/loader.svg" width="64px" alt="SVG Loader">
-      <h3>Handling QR scan data...</h3>
+      <h3>Processing QR code's data ...</h3>
     </div>
   </div>
 </template>

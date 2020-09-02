@@ -35,32 +35,45 @@
 
       <card v-else-if="showPrivateKeyStep">
         <template #header>Your Recovery Phrase</template>
+
+        <p v-if="showMode">
+          Please keep this Recovery Phrase safe and do not share it with other
+          people.
+        </p>
+
         <div class="privateKey">
           <p class="block">
             <b>{{ privateKey }}</b>
-            <br />
+          </p>
+          <div class="buttons">
             <button type="button" @click="copyString(privateKey)">
-              <img src="../assets/copy.svg" alt="Copy icon svg" />
+              <v-icon color="#000" size="20">mdi-content-copy</v-icon>
               Click to copy
             </button>
-          </p>
+            <button type="button" @click="exportPrivateKey()">
+              <v-icon color="#000" size="20">mdi-export-variant</v-icon>
+              Export Phrase
+            </button>
+          </div>
         </div>
-        <p>
+
+        <p v-if="!showMode">
           Backup your recovery phrase on a piece of paper or file that no one
           but you will ever see. Make multiple copies.
         </p>
-        <p>
+        <p v-if="!showMode">
           <b>Do not lose this recovery phrase!</b>
         </p>
-        <p>
+        <p v-if="!showMode">
           To make sure you got it right, you will be asked to recreate this
           recovery phrase in the next screen.
         </p>
         <template #footer>
           <button type="button" class="btn" @click="cancelBackupMode">
-            Cancel
+            {{ showMode ? 'Close' : 'Cancel' }}
           </button>
           <button
+            v-if="!showMode"
             type="button"
             class="btn btn-primary"
             @click="showVerifyPrivateKey"
@@ -123,12 +136,9 @@
 <script>
 import Card from 'vue-recheck-authorizer/src/components/cards/Card.vue';
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
-import CopyStringMixin from '../mixins/CopyString.vue';
 
 export default {
   name: 'AppIdentity',
-
-  mixins: [CopyStringMixin],
 
   components: {
     Card,
@@ -140,6 +150,7 @@ export default {
       mobileBackup: true,
       isBackupDone: false,
 
+      showMode: false,
       backupMode: false,
       privateKey: '',
       selectedKeys: [],
@@ -162,9 +173,40 @@ export default {
       this.privateKey = res.privateKey;
       this.splittedPrivateKey = this.privateKey.split(' ').sort();
     });
+
+    this.$root.$on('showPhrase', (pk) => {
+      document.querySelector('.my-styles').classList.add('show-mode');
+      this.backupMode = true;
+      this.showMode = true;
+      this.privateKey = pk;
+      this.showPrivateKey();
+    });
   },
 
   methods: {
+    exportPrivateKey() {
+      const socialShare = window?.plugins?.socialsharing
+
+      let options = {
+        message: `Recovery Phrase - ${this.privateKey}`,
+        subject: 'My ReCheck Identity - Recovery Phrase',
+        chooserTitle: 'Pick an app',
+        iPadCoordinates: '0,0,0,0'
+      };
+
+      const onSuccess = (result) => {
+        console.log(`Complete result: ${JSON.stringify(result, null, 4)}`);
+        console.log(`Share completed? ${result.completed}`);
+        console.log(`Shared to app: ${result.app}`);
+      };
+
+      const onError = (msg) => {
+        console.error(`Sharing failed with message: ${msg}`);
+      };
+
+      socialShare.shareWithOptions(options, onSuccess, onError)
+    },
+
     showPrivateKey() {
       this.showInfoStep = false;
       this.showPrivateKeyStep = true;
@@ -251,6 +293,7 @@ export default {
 
       this.backupMode = false;
       this.$refs.id.backupMode = false;
+      document.querySelector('.my-styles').classList.remove('show-mode');
     },
 
     inputFocusListeners() {
@@ -260,6 +303,20 @@ export default {
         input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
       });
     },
+
+    copyString(str) {
+      const aux = document.createElement('textarea');
+      aux.value = str;
+      document.body.appendChild(aux);
+      aux.select();
+
+      const isSuccess = document.execCommand('copy');
+      if (isSuccess) {
+        this.$root.$emit('alertOn', 'Successfully copied!', 'green');
+      }
+
+      document.body.removeChild(aux);
+    },
   },
 };
 </script>
@@ -267,6 +324,10 @@ export default {
 <style lang="scss">
 .my-styles {
   text-align: center;
+
+  &.show-mode > .current-identity {
+    display: none;
+  }
 
   .btn {
     padding: 11px 0;
@@ -316,32 +377,42 @@ export default {
     margin-bottom: 12px;
   }
 
+  .card-body {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
   .privateKey {
+    padding: 12px 12px 6px 12px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    color: #141414;
+    background-color: #ffffff;
+    box-shadow: 0 3px 6px rgba(20, 20, 20, 0.09);
+    border: 1px solid #dad2d2d0;
+    border-radius: 4px;
+
     .block {
-      padding: 12px 12px 6px 12px;
-      margin-top: 6px;
-      margin-bottom: 22px;
-      color: #141414;
-      background-color: #ffffff;
-      box-shadow: 0 3px 6px rgba(20, 20, 20, 0.09);
-      border: 1px solid #dad2d2d0;
-      border-radius: 4px;
       font-family: monospace;
-      font-size: 16px;
-      margin-bottom: 16px;
+      font-size: 15px;
+      color: #141414;
     }
 
-    button {
-      font-family: "Roboto", sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      margin-top: 12px;
-      text-transform: uppercase;
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
 
-      img {
-        width: 18px;
-        height: 18px;
-        vertical-align: text-bottom;
+      button {
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 12px;
+        text-transform: uppercase;
+
+        i.v-icon {
+          vertical-align: top;
+        }
       }
     }
   }

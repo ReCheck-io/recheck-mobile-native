@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="io.recheck.android" id="io.recheck" ios-CFBundleIdentifier="io.recheck" version="1.0.12" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-packageName="io.recheck.android" id="io.recheck" ios-CFBundleIdentifier="io.recheck" version="1.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ReCheck</name>
     <description>ReCheck - ReCheck's native mobile app.</description>
     <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
@@ -12,11 +12,13 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="Orientation" value="portrait" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#04558a" />
+
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="android-minSdkVersion" value="19" />
@@ -38,6 +40,7 @@
         <splash density="port-xxhdpi" src="resources/screen/android/drawable-port-xxhdpi/screen.png" />
         <splash density="port-xxxhdpi" src="resources/screen/android/drawable-port-xxxhdpi/screen.png" />
     </platform>
+
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
@@ -75,6 +78,7 @@
         <splash height="1334" src="resources/screen/ios/Default-667h.png" width="750" />
         <splash height="2208" src="resources/screen/ios/Default-736h.png" width="1242" />
     </platform>
+
     <plugin name="cordova-plugin-whitelist" spec="^1.3.4" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.2" />
     <plugin name="cordova-plugin-qrscanner" spec="^3.0.1" />
@@ -84,6 +88,13 @@
     <plugin name="cordova-plugin-splashscreen" spec="^6.0.0" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.2" />
     <plugin name="cordova-plugin-deeplinks" spec="~1.1.1" />
+
+    <plugin name="cordova-plugin-firebasex" spec="latest" >
+        <variable name="FIREBASE_ANALYTICS_COLLECTION_ENABLED" value="false" />
+        <variable name="FIREBASE_PERFORMANCE_COLLECTION_ENABLED" value="false" />
+        <variable name="FIREBASE_CRASHLYTICS_COLLECTION_ENABLED" value="false" />
+    </plugin>
+    
     <universal-links>
         <host event="qrScan" name="*.recheck.io" scheme="https">
             <path url="/login/*" />

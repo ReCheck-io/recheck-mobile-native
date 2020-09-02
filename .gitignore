@@ -27,4 +27,9 @@ pnpm-debug.log*
 /src-cordova/plugins
 /public/cordova.js
 
+
+# Firebase Keys
+**/google-services.json
+**/GoogleService-info.plist
+
 **/*.keystore

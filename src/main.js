@@ -72,6 +72,22 @@ const initApp = () => {
     mounted() {
       chainClient.setURLandNetwork('', process.env.VUE_APP_NETWORK);
       checkConnection();
+
+      const firebase = window?.FirebasePlugin;
+
+      firebase.hasPermission((status) => {
+        if (!status) {
+          firebase.grantPermission((hasPermission) => {
+            console.log(`Permissions was ${hasPermission ? 'granted' : 'denied'}`);
+          })
+        }
+      });
+
+      window.QRScanner.getStatus((status) => {
+        if (!status.prepared) {
+          window.QRScanner.prepare();
+        }
+      });
     }
   }).$mount('#app');
 };
@@ -79,12 +95,6 @@ const initApp = () => {
 // Wait for the deviceready event to start the render
 document.addEventListener('deviceready', () => {
   initApp();
-
-  window.QRScanner.getStatus((status) => {
-    if (!status.prepared) {
-      window.QRScanner.prepare();
-    }
-  });
 
   document.addEventListener('pause', () => {
     window.lastPage = router.currentRoute.path;
