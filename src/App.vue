@@ -5,10 +5,10 @@
 
     <v-main>
       <router-view />
-      <AppAlert :isBackupDone="pinned && !isBackupDone" />
+      <AppAlert v-if="!isActionPage" :isBackupDone="pinned && !isBackupDone" />
     </v-main>
 
-    <AppNavbar />
+    <AppNavbar v-if="!isActionPage" />
   </v-app>
 </template>
 
@@ -35,12 +35,30 @@ export default {
       pinned: false,
       isBackupDone: true,
       isScanPage: '#FFFFFF',
+      isActionPage: router.history.current.path === '/action'
     };
   },
 
   mounted() {
     this.pinned = chainClient.pinned();
     this.checkIsScanPage(router.history.current);
+    this.isActionPage = router.history.current.path === '/action';
+    this.$root.$children[0].isActionPage = router.history.current.path === '/action';
+
+    const firebase = window?.FirebasePlugin;
+
+    firebase.getToken((token) => {
+      localStorage.setItem('firebaseToken', token);
+    });
+
+    firebase.onMessageReceived((data) => {
+      if (router.currentRoute.path !== '/action') {
+        router.push({
+          name: 'Action',
+          params: data
+        })
+      }
+    })
 
     this.isBackupDone = JSON.parse(localStorage.getItem('backupDone'));
 

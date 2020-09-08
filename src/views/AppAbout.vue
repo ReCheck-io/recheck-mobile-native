@@ -58,6 +58,10 @@ export default {
       currentYear: new Date().getFullYear(),
     };
   },
+
+  mounted() {
+    this.$root.$children[0].isActionPage = this.$router.history.current.path === '/action';
+  }
 };
 </script>
 

@@ -8,14 +8,19 @@ const AppCamera = (resolve) => {
     resolve(require('@/views/AppCamera'));
   });
 };
-const AppLinks = (resolve) => {
-  require.ensure(['@/views/AppLinks'], () => {
-    resolve(require('@/views/AppLinks'));
-  });
-};
 const AppIdentity = (resolve) => {
   require.ensure(['@/views/AppIdentity'], () => {
     resolve(require('@/views/AppIdentity'));
+  });
+};
+const AppAction = (resolve) => {
+  require.ensure(['@/views/AppAction'], () => {
+    resolve(require('@/views/AppAction'));
+  });
+};
+const AppLinks = (resolve) => {
+  require.ensure(['@/views/AppLinks'], () => {
+    resolve(require('@/views/AppLinks'));
   });
 };
 const AppAbout = (resolve) => {
@@ -43,6 +48,12 @@ const router = new Router({
       name: 'Identity',
       path: '/identity',
       component: AppIdentity,
+      props: true
+    },
+    {
+      name: 'Action',
+      path: '/action',
+      component: AppAction,
       props: true
     },
     {

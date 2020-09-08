@@ -163,6 +163,7 @@ export default {
   },
 
   mounted() {
+    this.$root.$children[0].isActionPage = this.$router.history.current.path === '/action';
     this.pinned = chainClient.pinned();
     this.inputFocusListeners();
 

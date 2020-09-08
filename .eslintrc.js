@@ -12,6 +12,7 @@ module.exports = {
   },
   rules: {
     'semi': 0,
+    'consistent-return': 0,
     'prefer-const': 0,
     'no-unused-vars': 0,
     'no-shadow': 0,
