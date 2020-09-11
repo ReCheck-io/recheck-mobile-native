@@ -3,34 +3,31 @@
     <div class="content px-3 py-1">
       <div class="data">
         <div class="action">
-          <h3 v-if="!!requestType">{{ requestType }}</h3>
-          <p v-if="dataName"><b>Data Name:</b> {{ dataName }}</p>
-          <p v-if="dataHash"><b>Data ID:</b> {{ dataHash }}</p>
-          <p v-if="recipientInfo"><b>Recipient:</b> {{ recipientInfo }}</p>
+          <h3 v-if="!!requestType">{{ requestType }} Request</h3>
         </div>
         <div class="extra-info">
           <span class="hardware">
             <v-icon>mdi-laptop</v-icon>
-            <p v-if="actionData.browser && actionData.version">
+            <p v-if="!!actionData.browser && !!actionData.version">
               {{ actionData.browser }} {{ actionData.version }}
             </p>
-            <p v-if="actionData.platform && actionData.os">
-              {{ actionData.platform }} {{ actionData.os }}
+            <p v-if="!!actionData.platform && !!actionData.os">
+              {{ actionData.platform }}
             </p>
           </span>
           <span class="location">
             <v-icon>mdi-map-marker-outline</v-icon>
-            <p v-if="actionData.ip">
+            <p v-if="!!actionData.ip">
               {{ actionData.ip }}
             </p>
-            <p v-if="actionData.ip">
-              Ruse, Bulgaria
+            <p v-if="!!actionData.geoIp && !!actionData.geoIp.country">
+              {{ actionData.geoIp.country }}
             </p>
           </span>
-          <span class="time">
+          <span class="time" v-if="!!actionData.timestamp">
             <v-icon>mdi-clock-outline</v-icon>
-            <p>{{ new Date().toUTCString().split("GMT")[0].slice(0, 16) }}</p>
-            <p>{{ new Date().toUTCString().split("GMT")[0].slice(16) }}</p>
+            <p>{{ actionData.timestamp.slice(0, 16) }} UTC</p>
+            <p>{{ actionData.timestamp.slice(16) }}</p>
           </span>
         </div>
       </div>
@@ -51,7 +48,7 @@
     <div class="btn-group">
       <button type="button" class="btn deny" @click="onDeny">
         <v-icon>mdi-close</v-icon>
-        Deny
+        Decline
       </button>
       <button type="button" class="btn approve" @click="onApprove">
         <v-icon>mdi-check</v-icon>
@@ -59,30 +56,60 @@
       </button>
     </div>
 
+    <input-modal
+      :isVisible="showPinModal"
+      :inputValue.sync="pinCode"
+      :rememberPin="false"
+      modalFormId="pinFormModal"
+    >
+      <template #header>Passcode</template>
+      <template #footer>
+        <button type="button" class="btn" @click="cancelPin">Cancel</button>
+        <button
+          type="submit"
+          class="btn"
+          form="pinFormModal"
+          @click="confirmPin"
+          @keyup.enter="confirmPin"
+        >
+          Confirm
+        </button>
+      </template>
+    </input-modal>
+
     <Alert />
+    <Loader />
   </div>
 </template>
 
 <script>
-import Alert from 'vue-recheck-authorizer/src/components/alert/Alert.vue'
-import chainClient from 'vue-recheck-authorizer/src/chain'
-import { truncate } from '../utils'
+import InputModal from 'vue-recheck-authorizer/src/components/modals/InputModal.vue';
+import Loader from 'vue-recheck-authorizer/src/components/loader/Loader.vue';
+import Alert from 'vue-recheck-authorizer/src/components/alert/Alert.vue';
+import chain from 'vue-recheck-authorizer/src/chain';
 import router from '../router';
 
 export default {
   name: 'AppAction',
 
   components: {
-    Alert
+    Alert,
+    Loader,
+    InputModal,
   },
 
   data() {
     return {
-      requestType: 'Share Request',
-      actionData: null,
-      dataName: '',
-      dataHash: '',
-      recipientInfo: '',
+      selectionActionHash: '',
+      requestType: '',
+      actionData: {},
+      actionDate: new Date()
+        .toUTCString()
+        .split('GMT')[0]
+        .trim(),
+
+      showPinModal: false,
+      pinCode: '',
 
       interval: {},
       value: 0,
@@ -91,28 +118,46 @@ export default {
 
   mounted() {
     this.$root.$children[0].isActionPage = router.history.current.path === '/action';
+    chain.setURLandNetwork(
+      localStorage.getItem('apiUrl'),
+      process.env.VUE_APP_NETWORK
+    );
 
-    const notificationParams = router.currentRoute.params
-    this.actionData = JSON.parse(notificationParams.data);
-    console.log(JSON.parse(notificationParams.data))
+    this.actionData = router.currentRoute.params && router.currentRoute.params.data
+      ? JSON.parse(router.currentRoute.params.data)
+      : {};
+
+    if (Object.entries(this.actionData).length !== 0) {
+      this.actionData.timestamp = this.actionData.timestamp
+        .replace('GMT', '')
+        .trim();
+
+      this.actionData.platform = `
+        ${this.actionData.platform} ${this.actionData.os}
+      `.replace(' Windows', '');
+
+      this.selectionHash = this.actionData.selectionActionHash;
+      this.requestType = this.actionData.type;
+      this.requestType = `
+        ${this.requestType.charAt(0).toUpperCase() + this.requestType.slice(1)}
+      `;
+    }
 
     this.startTimer();
   },
 
   methods: {
     startTimer() {
-      const TIME_LIMIT = 60;
+      const TIME_TO_INCREMENT = 1.111111111111;
+      const TIME_LIMIT = 90;
       let timePassed = 0;
       let timeLeft = TIME_LIMIT;
-      let timerInterval = null;
 
       this.interval = setInterval(() => {
         timePassed += 1;
-        this.value += 1.69;
+        this.value += TIME_TO_INCREMENT;
         timeLeft = TIME_LIMIT - timePassed;
-        document.getElementById('timer').innerHTML = this.formatTime(
-          timeLeft
-        );
+        document.getElementById('timer').innerHTML = this.formatTime(timeLeft);
 
         if (timeLeft === 0) {
           this.onTimesUp();
@@ -140,21 +185,52 @@ export default {
 
       setTimeout(() => {
         router.push('/scan');
-      }, 2500);
+      }, 2000);
     },
 
     onDeny() {
       this.value = 0;
-      document.getElementById('timer').innerHTML = '0:00';
       clearInterval(this.interval);
+      document.getElementById('timer').innerHTML = '0:00';
 
       router.push('/scan');
     },
 
     onApprove() {
-      // chainClient.doExecSelection();
-    }
+      this.pinCode = '';
+      this.showPinModal = true;
+    },
+
+    cancelPin() {
+      this.showPinModal = false;
+    },
+
+    confirmPin() {
+      this.showPinModal = false;
+      this.$root.$emit('loaderOn');
+
+      chain.doExecSelection(this.pinCode, this.selectionHash, (err) => {
+        this.$root.$emit('loaderOff');
+
+        if (!err) {
+          this.$root.$emit('overlayOn', 'success');
+        } else if (err === 'authError') {
+          this.$root.$emit('alertOn', 'Passcode mismatch!', 'red');
+        } else {
+          this.$root.$emit('overlayOn', 'error');
+        }
+
+        if (!err || (err && err !== 'authError')) {
+          setTimeout(() => {
+            router.push('/scan');
+          }, 1810);
+        }
+      });
+
+      this.pinCode = '';
+    },
   },
+
   beforeDestroy() {
     clearInterval(this.interval);
   },
@@ -162,6 +238,16 @@ export default {
 </script>
 
 <style lang="scss">
+.modal {
+  &-body {
+    padding: 14px 22px 14px 22px;
+  }
+
+  &-footer {
+    padding: 0 20px 14px 20px !important;
+  }
+}
+
 .action-container {
   width: 100%;
   height: 100%;

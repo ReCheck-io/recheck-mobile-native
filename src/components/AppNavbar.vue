@@ -37,12 +37,8 @@ export default {
   mounted() {
     this.activeBtn = !chainClient.pinned() ? 1 : 2;
 
-    this.$root.$on('focusin', (res) => {
-      this.showNav = res;
-    });
-    this.$root.$on('focusout', (res) => {
-      this.showNav = res;
-    });
+    window.addEventListener('keyboardDidShow', () => this.showNav = false);
+    window.addEventListener('keyboardDidHide', () => this.showNav = true);
   },
 
   methods: {

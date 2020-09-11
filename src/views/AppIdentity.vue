@@ -46,10 +46,6 @@
             <b>{{ privateKey }}</b>
           </p>
           <div class="buttons">
-            <button type="button" @click="copyString(privateKey)">
-              <v-icon color="#000" size="20">mdi-content-copy</v-icon>
-              Click to copy
-            </button>
             <button type="button" @click="exportPrivateKey()">
               <v-icon color="#000" size="20">mdi-export-variant</v-icon>
               Export Phrase
@@ -165,7 +161,6 @@ export default {
   mounted() {
     this.$root.$children[0].isActionPage = this.$router.history.current.path === '/action';
     this.pinned = chainClient.pinned();
-    this.inputFocusListeners();
 
     this.$root.$on('backupMode', (res) => {
       this.pinned = chainClient.pinned();
@@ -295,28 +290,6 @@ export default {
       this.backupMode = false;
       this.$refs.id.backupMode = false;
       document.querySelector('.my-styles').classList.remove('show-mode');
-    },
-
-    inputFocusListeners() {
-      const inputs = document.querySelectorAll('input');
-      inputs.forEach((input) => {
-        input.addEventListener('focusin', () => this.$root.$emit('focusin', false));
-        input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
-      });
-    },
-
-    copyString(str) {
-      const aux = document.createElement('textarea');
-      aux.value = str;
-      document.body.appendChild(aux);
-      aux.select();
-
-      const isSuccess = document.execCommand('copy');
-      if (isSuccess) {
-        this.$root.$emit('alertOn', 'Successfully copied!', 'green');
-      }
-
-      document.body.removeChild(aux);
     },
   },
 };

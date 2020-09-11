@@ -12,6 +12,7 @@
     "cordova-ios": "^5.1.1",
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-qrscanner": "^3.0.1",
@@ -61,7 +62,8 @@
         "ANDROID_FIREBASE_CRASHLYTICS_NDK_VERSION": "17.0.1",
         "ANDROID_GSON_VERSION": "2.8.6"
       },
-      "cordova-plugin-enable-multidex": {}
+      "cordova-plugin-enable-multidex": {},
+      "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
       "android",

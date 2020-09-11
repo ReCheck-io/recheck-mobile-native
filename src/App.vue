@@ -43,26 +43,16 @@ export default {
     this.pinned = chainClient.pinned();
     this.checkIsScanPage(router.history.current);
     this.isActionPage = router.history.current.path === '/action';
-    this.$root.$children[0].isActionPage = router.history.current.path === '/action';
 
     const firebase = window?.FirebasePlugin;
 
-    firebase.getToken((token) => {
-      localStorage.setItem('firebaseToken', token);
-    });
+    firebase.getToken((token) => this.setFirebaseToken(token));
+    firebase.onMessageReceived((data) => this.handleNotifications(data));
 
-    firebase.onMessageReceived((data) => {
-      if (router.currentRoute.path !== '/action') {
-        router.push({
-          name: 'Action',
-          params: data
-        })
-      }
-    })
-
+    // Backup alert
     this.isBackupDone = JSON.parse(localStorage.getItem('backupDone'));
 
-    if (chainClient.pinned()) {
+    if (this.pinned) {
       setTimeout(() => {
         if (!this.isBackupDone) {
           this.isBackupDone = true;
@@ -77,6 +67,23 @@ export default {
         this.isScanPage = 'transparent';
       } else {
         this.isScanPage = '#FFFFFF';
+      }
+    },
+
+    setFirebaseToken(token) {
+      if (token && token !== null) {
+        localStorage.setItem('firebaseToken', token);
+      }
+    },
+
+    handleNotifications(data) {
+      if (data && data.data && JSON.parse(data.data).selectionActionHash) {
+        if (router.currentRoute.path !== '/action') {
+          router.push({
+            name: 'Action',
+            params: data
+          })
+        }
       }
     }
   },

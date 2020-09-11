@@ -12,15 +12,16 @@
     />
 
     <div class="guides" v-if="pinned">
-      <div class="info-text">
-        <h2>Scan QR Code</h2>
-        <p class="px-3">
-          Open <b>https://www.my.recheck.io</b> on your computer and scan the QR
+      <img class="qr-scan-guides" src="../assets/scan.png" />
+      <div class="info-card">
+        <img src="../assets/scan-hint.svg" alt="svg" />
+        <p>
+          Open <b>https://my.recheck.io</b> on your computer and scan the QR
           Code
         </p>
       </div>
-      <img class="qr-scan-guides" src="../assets/scan.png" />
     </div>
+
   </div>
 </template>
 
@@ -47,7 +48,6 @@ export default {
   mounted() {
     this.$root.$children[0].isActionPage = this.$router.history.current.path === '/action';
     this.pinned = chainClient.pinned();
-    this.inputFocusListeners();
 
     // Clear deep links data for next open by user
     setTimeout(() => {
@@ -62,14 +62,6 @@ export default {
       } else {
         this.$root.$emit('overlayOn', 'error');
       }
-    },
-
-    inputFocusListeners() {
-      const inputs = document.querySelectorAll('input');
-      inputs.forEach((input) => {
-        input.addEventListener('focusin', () => this.$root.$emit('focusin', false));
-        input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
-      });
     },
   },
 };
@@ -114,24 +106,27 @@ export default {
   top: 0;
   left: 0;
 
-  .info-text {
-    color: #fff;
-    text-align: center;
-    margin-top: -24px;
-    margin-bottom: 44px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-
-    p {
-      margin-bottom: 0;
-    }
+  .qr-scan-guides {
+    width: 45%;
+    max-width: 400px;
+    max-height: 38%;
+    margin-bottom: 13em;
   }
 
-  .qr-scan-guides {
-    width: 60%;
-    max-width: 400px;
-    max-height: 50%;
-    margin-bottom: 1em;
+  .info-card {
+    width: 100%;
+    height: 210px;
+    padding: 16px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #141414;
+    background-color: #fff;
+
+    img {
+      max-width: 170px;
+    }
   }
 }
 </style>

@@ -1,0 +1,18 @@
+{
+  "android": {
+    "debug": {
+      "keystore": "./app.keystore",
+      "storePassword": "recheck",
+      "alias": "recheck",
+      "password" : "recheck",
+      "keystoreType": "jks"
+    },
+    "release": {
+      "keystore": "./app.keystore",
+      "storePassword": "recheck",
+      "alias": "recheck",
+      "password" : "recheck",
+      "keystoreType": "jks"
+    }
+  }
+}

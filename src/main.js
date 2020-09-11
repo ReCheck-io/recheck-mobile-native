@@ -68,7 +68,6 @@ const initApp = () => {
     vuetify,
     render: (h) => h(App),
 
-    methods: {},
     mounted() {
       chainClient.setURLandNetwork('', process.env.VUE_APP_NETWORK);
       checkConnection();
@@ -94,6 +93,9 @@ const initApp = () => {
 
 // Wait for the deviceready event to start the render
 document.addEventListener('deviceready', () => {
+  let lastTimeBackPress = 0;
+  const timePeriodToExit = 2000;
+
   initApp();
 
   document.addEventListener('pause', () => {
@@ -102,6 +104,20 @@ document.addEventListener('deviceready', () => {
 
   document.addEventListener('resume', () => {
     checkConnection();
+  }, false);
+
+  document.addEventListener('backbutton', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+      navigator.app.exitApp();
+    } else {
+      if (router.currentRoute.path !== '/scan') {
+        router.push('/scan');
+      }
+      lastTimeBackPress = new Date().getTime();
+    }
   }, false);
 });
 
