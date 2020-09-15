@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="com.ipocean.android" id="com.ipocean.ios" ios-CFBundleIdentifier="com.ipocean.ios" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-packageName="com.ipocean.android" id="com.ipocean.ios" ios-CFBundleIdentifier="com.ipocean.ios" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ipOcean</name>
     <description>ipOcean</description>
     <author email="estoyanov@ipocean.com" href="https://ipocean.com">ipOcean Team</author>

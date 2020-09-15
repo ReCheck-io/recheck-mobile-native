@@ -1,6 +1,6 @@
 <template>
   <v-app-bar class="primary" app>
-    <v-img max-width="40px" src="../assets/ipocean-logo-square.png"></v-img>
+    <img src="../assets/ipocean-logo-square.png" alt="ipOcean's Logo" class="ipocean-logo" />
     <v-btn to="/about" color="white" icon fixed right>
       <v-icon>mdi-information-outline</v-icon>
     </v-btn>
@@ -12,3 +12,9 @@ export default {
   name: 'AppToolbar',
 };
 </script>
+
+<style lang="scss">
+.ipocean-logo {
+  max-height: 90%;
+}
+</style>

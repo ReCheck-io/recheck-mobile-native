@@ -37,12 +37,13 @@ export default {
   mounted() {
     this.activeBtn = !chainClient.pinned() ? 1 : 2;
 
-    this.$root.$on('focusin', (res) => {
-      this.showNav = res;
-    });
-    this.$root.$on('focusout', (res) => {
-      this.showNav = res;
-    });
+    this.$root.$on('pinmodal-is-active', (isActive) => {
+      if (isActive) {
+        this.showNav = !isActive;
+      } else {
+        this.showNav = !isActive;
+      }
+    })
   },
 
   methods: {

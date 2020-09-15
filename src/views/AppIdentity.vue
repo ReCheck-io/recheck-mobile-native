@@ -1,10 +1,10 @@
 <template>
   <div class="px-3 py-0">
     <recheck-identity
-      ref="id"
-      appName="ipOcean"
       :mobileBackup="true"
       classes="my-styles"
+      appName="ipOcean"
+      ref="id"
     />
 
     <div v-if="pinned && backupMode" class="backup-identity my-styles">
@@ -46,10 +46,6 @@
             <b>{{ privateKey }}</b>
           </p>
           <div class="buttons">
-            <button type="button" @click="copyString(privateKey)">
-              <v-icon color="#000" size="20">mdi-content-copy</v-icon>
-              Click to copy
-            </button>
             <button type="button" @click="exportPrivateKey()">
               <v-icon color="#000" size="20">mdi-export-variant</v-icon>
               Export Phrase
@@ -161,7 +157,6 @@ export default {
 
   mounted() {
     this.pinned = chainClient.pinned();
-    this.inputFocusListeners();
 
     this.$root.$on('backupMode', (res) => {
       this.pinned = chainClient.pinned();
@@ -185,7 +180,7 @@ export default {
       const socialShare = window?.plugins?.socialsharing;
 
       const options = {
-        message: `Recovery Phrase - ${this.privateKey}`,
+        message: this.privateKey,
         subject: 'ipOcean ID - Recovery Phrase',
         chooserTitle: 'Pick an app',
         iPadCoordinates: '0,0,0,0'
@@ -291,28 +286,6 @@ export default {
       this.backupMode = false;
       this.$refs.id.backupMode = false;
       document.querySelector('.my-styles').classList.remove('show-mode');
-    },
-
-    inputFocusListeners() {
-      const inputs = document.querySelectorAll('input');
-      inputs.forEach((input) => {
-        input.addEventListener('focusin', () => this.$root.$emit('focusin', false));
-        input.addEventListener('focusout', () => this.$root.$emit('focusout', true));
-      });
-    },
-
-    copyString(str) {
-      const aux = document.createElement('textarea');
-      aux.value = str;
-      document.body.appendChild(aux);
-      aux.select();
-
-      const isSuccess = document.execCommand('copy');
-      if (isSuccess) {
-        this.$root.$emit('alertOn', 'Successfully copied!', 'green');
-      }
-
-      document.body.removeChild(aux);
     },
   },
 };
