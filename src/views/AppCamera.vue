@@ -5,6 +5,7 @@
       :useIntegratedCamera="useIntegratedCamera"
       :handledByComponent="handledByComponent"
       :isCameraOmitted="isCameraOmitted"
+      :agreementText="agreementText"
       :scanLink="scanLink"
       appRequestId="ReCheckAPP"
       classes="my-styles"
@@ -38,6 +39,8 @@ export default {
       handledByComponent: true,
       useIntegratedCamera: false,
 
+      agreementText: 'By approving the action you agree to our <a class="link" href="https://recheck.io/privacy-policy-terms-of-use/" target="_blank">Privacy Policy</a> and <a class="link" href="https://recheck.io/terms-and-conditions/" target="_blank">Terms &amp; Conditions</a>.',
+
       isCameraOmitted: this.$route.params.omitCamera
         ? this.$route.params.omitCamera
         : false,
@@ -48,6 +51,14 @@ export default {
   mounted() {
     this.$root.$children[0].isActionPage = this.$router.history.current.path === '/action';
     this.pinned = chainClient.pinned();
+
+    this.$root.$on('pinmodal-is-active', (isActive) => {
+      if (isActive) {
+        document.querySelector('.guides').style.display = 'none';
+      } else {
+        document.querySelector('.guides').style.display = 'flex';
+      }
+    })
 
     // Clear deep links data for next open by user
     setTimeout(() => {

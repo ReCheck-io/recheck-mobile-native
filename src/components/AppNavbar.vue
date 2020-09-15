@@ -37,8 +37,13 @@ export default {
   mounted() {
     this.activeBtn = !chainClient.pinned() ? 1 : 2;
 
-    window.addEventListener('keyboardDidShow', () => this.showNav = false);
-    window.addEventListener('keyboardDidHide', () => this.showNav = true);
+    this.$root.$on('pinmodal-is-active', (isActive) => {
+      if (isActive) {
+        this.showNav = !isActive;
+      } else {
+        this.showNav = !isActive;
+      }
+    });
   },
 
   methods: {

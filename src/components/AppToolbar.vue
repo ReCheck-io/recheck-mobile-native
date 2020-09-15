@@ -1,6 +1,6 @@
 <template>
   <v-app-bar class="primary" app>
-    <v-img max-width="90px" src="../assets/recheck-logo.png"></v-img>
+    <img src="../assets/recheck-logo.png" alt="ReCheck's Logo" class="recheck-logo" />
     <v-btn to="/about" color="white" icon fixed right>
       <v-icon>mdi-information-outline</v-icon>
     </v-btn>
@@ -12,3 +12,9 @@ export default {
   name: 'AppToolbar',
 };
 </script>
+
+<style lang="scss">
+.recheck-logo {
+  max-height: 90%;
+}
+</style>

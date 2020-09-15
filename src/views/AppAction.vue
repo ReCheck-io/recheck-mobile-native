@@ -1,6 +1,6 @@
 <template>
   <div class="action-container py-0">
-    <div class="content px-3 py-1">
+    <div class="content px-3">
       <div class="data">
         <div class="action">
           <h3 v-if="!!requestType">{{ requestType }} Request</h3>
@@ -107,6 +107,7 @@ export default {
         .toUTCString()
         .split('GMT')[0]
         .trim(),
+      utcTimestamp: '',
 
       showPinModal: false,
       pinCode: '',
@@ -128,35 +129,54 @@ export default {
       : {};
 
     if (Object.entries(this.actionData).length !== 0) {
+      this.utcTimestamp = this.actionData.timestamp;
       this.actionData.timestamp = this.actionData.timestamp
         .replace('GMT', '')
         .trim();
 
       this.actionData.platform = `
         ${this.actionData.platform} ${this.actionData.os}
-      `.replace(' Windows', '');
+      `
+        .replace(' Windows', '')
+        .replace(' Linux', '')
+        .trim();
 
       this.selectionHash = this.actionData.selectionActionHash;
-      this.requestType = this.actionData.type;
+
+      if (this.selectionHash.includes('se:') && this.actionData.type === 'share') {
+        this.requestType = 'Email Share';
+      } else {
+        this.requestType = this.actionData.type;
+      }
+
       this.requestType = `
         ${this.requestType.charAt(0).toUpperCase() + this.requestType.slice(1)}
       `;
-    }
 
-    this.startTimer();
+      let timeLimit = this.actionData.ttl
+        - (new Date(new Date().toUTCString()).getTime()
+        - new Date(this.utcTimestamp).getTime());
+
+      timeLimit = Math.floor(timeLimit / 1000);
+
+      if (timeLimit <= 0) {
+        timeLimit = 1;
+      }
+
+      this.startTimer(timeLimit);
+    }
   },
 
   methods: {
-    startTimer() {
-      const TIME_TO_INCREMENT = 1.111111111111;
-      const TIME_LIMIT = 90;
+    startTimer(timeLimit) {
+      const TIME_TO_INCREMENT = 100 / timeLimit;
       let timePassed = 0;
-      let timeLeft = TIME_LIMIT;
+      let timeLeft = timeLimit;
 
       this.interval = setInterval(() => {
         timePassed += 1;
         this.value += TIME_TO_INCREMENT;
-        timeLeft = TIME_LIMIT - timePassed;
+        timeLeft = timeLimit - timePassed;
         document.getElementById('timer').innerHTML = this.formatTime(timeLeft);
 
         if (timeLeft === 0) {
@@ -346,7 +366,7 @@ export default {
       outline: 0;
       display: flex;
       align-items: center;
-      place-content: center;
+      justify-content: center;
 
       i {
         color: #fff;

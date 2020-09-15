@@ -6,7 +6,7 @@
         "appID": "<YOUR_TEAM_ID_FROM_MEMBER_CENTER>.io.recheck",
         "paths": [
           "/login/*",
-          "/data/*:*"
+          "/exec/*:*"
         ]
       }
     ]

@@ -99,8 +99,8 @@ export default {
 <style>
 body {
   font-family: "Roboto", -apple-system, 'Open Sans', sans-serif;
-  font-size: 16px;
   font-weight: 400;
+  font-size: 16px;
   line-height: 1;
 }
 

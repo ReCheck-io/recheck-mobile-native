@@ -184,7 +184,7 @@ export default {
       const socialShare = window?.plugins?.socialsharing
 
       let options = {
-        message: `Recovery Phrase - ${this.privateKey}`,
+        message: this.privateKey,
         subject: 'My ReCheck Identity - Recovery Phrase',
         chooserTitle: 'Pick an app',
         iPadCoordinates: '0,0,0,0'
