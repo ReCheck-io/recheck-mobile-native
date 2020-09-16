@@ -3,10 +3,7 @@
   "version": "1.0.3",
   "name": "ipocean-mobile-native",
   "description": "ipOcean - ipOcean's native mobile application.",
-  "author": {
-    "name": "ipOcean Team",
-    "email": "estoyanov@ipocean.com"
-  },
+  "author": "ReCheck BV <info@recheck.io>",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
