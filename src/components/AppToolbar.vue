@@ -1,6 +1,8 @@
 <template>
   <v-app-bar class="primary" app>
-    <img src="../assets/ipocean-logo-square.png" alt="ipOcean's Logo" class="ipocean-logo" />
+    <a href="https://my.ipocean.com" target="_blank" class="ipocean-logo">
+      <img src="../assets/ipocean-logo.svg" alt="ipOcean's Logo" />
+    </a>
     <v-btn to="/about" color="white" icon fixed right>
       <v-icon>mdi-information-outline</v-icon>
     </v-btn>
@@ -15,6 +17,10 @@ export default {
 
 <style lang="scss">
 .ipocean-logo {
-  max-height: 90%;
+  height: 100%;
+
+  img {
+    max-height: 90%;
+  }
 }
 </style>

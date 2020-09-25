@@ -37,13 +37,13 @@ export default {
   mounted() {
     this.activeBtn = !chainClient.pinned() ? 1 : 2;
 
-    this.$root.$on('pinmodal-is-active', (isActive) => {
+    this.$root.$on('pinmodal-status', (isActive) => {
       if (isActive) {
         this.showNav = !isActive;
       } else {
         this.showNav = !isActive;
       }
-    })
+    });
   },
 
   methods: {

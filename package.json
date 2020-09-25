@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "ipocean-mobile-native",
   "description": "ipOcean - ipOcean's native mobile application.",
   "author": "ReCheck BV <info@recheck.io>",
@@ -22,7 +22,7 @@
     "vue": "^2.6.11",
     "vue-cordova": "^0.1.2",
     "vue-qrcode-reader": "^2.3.3",
-    "vue-recheck-authorizer": "1.0.76",
+    "vue-recheck-authorizer": "1.0.82",
     "vue-router": "^3.3.4",
     "vuetify": "^2.3.4",
     "vuex": "^3.5.1"

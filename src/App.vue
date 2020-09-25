@@ -39,6 +39,7 @@ export default {
   },
 
   mounted() {
+    window.launchedAppFromLink = false;
     this.pinned = chainClient.pinned();
     this.checkIsScanPage(router.history.current);
 

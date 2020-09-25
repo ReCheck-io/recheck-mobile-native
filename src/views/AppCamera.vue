@@ -11,12 +11,12 @@
       ref="camera"
     />
 
-    <div class="guides" v-if="pinned">
+    <div class="guides" v-if="pinned" v-show="showHints">
       <img class="qr-scan-guides" src="../assets/scan.png" />
       <div class="info-card">
         <img src="../assets/scan-hint.svg" alt="svg" />
         <p>
-          Open <b>https://my.ipocean.com</b> on your computer and scan the QR
+          Open <b>my.ipocean.com</b> on your computer and scan the QR
           Code
         </p>
       </div>
@@ -32,6 +32,7 @@ export default {
 
   data() {
     return {
+      showHints: true,
       pinned: false,
       isBackupDone: false,
       handledByComponent: true,
@@ -44,21 +45,25 @@ export default {
     };
   },
 
+  beforeMount() {
+    if (window.launchedAppFromLink) {
+      this.clearDeeplinks();
+    }
+  },
+
   mounted() {
     this.pinned = chainClient.pinned();
 
-    this.$root.$on('pinmodal-is-active', (isActive) => {
-      if (isActive) {
-        document.querySelector('.guides').style.display = 'none';
-      } else {
-        document.querySelector('.guides').style.display = 'flex';
+    this.$root.$on('pinmodal-status', (isActive) => {
+      if (this.$router.currentRoute.path === '/scan') {
+        if (isActive) {
+          this.showHints = !isActive;
+        } else {
+          this.showHints = !isActive;
+          this.clearDeeplinks();
+        }
       }
     });
-
-    // Clear deep links data for next open by user
-    setTimeout(() => {
-      window.universalLinks.dpLink = null;
-    }, 1000);
   },
 
   methods: {
@@ -68,7 +73,19 @@ export default {
       } else {
         this.$root.$emit('overlayOn', 'error');
       }
+
+      setTimeout(() => {
+        if (window.launchedAppFromLink) {
+          this.clearDeeplinks();
+          navigator.app.exitApp();
+        }
+      }, 1900);
     },
+    clearDeeplinks() {
+      this.$route.params.omitCamera ? this.$route.params.omitCamera = null : '';
+      this.$route.params.scanUrl ? this.$route.params.scanUrl = null : '';
+      window.universalLinks.dpLink = null;
+    }
   }
 };
 </script>
@@ -112,26 +129,27 @@ export default {
   top: 0;
   left: 0;
 
-  .qr-scan-guides {
-    width: 45%;
+ .qr-scan-guides {
+    width: 65%;
     max-width: 400px;
-    max-height: 38%;
-    margin-bottom: 13em;
+    max-height: 400px;
+    margin-bottom: 10em;
   }
 
   .info-card {
     width: 100%;
-    height: 210px;
-    padding: 16px;
+    height: 160px;
+    padding: 13px;
     text-align: center;
     position: absolute;
     bottom: 0;
     left: 0;
+    opacity: 0.7;
     color: #141414;
     background-color: #fff;
 
     img {
-      max-width: 170px;
+      max-width: 120px;
     }
   }
 }
