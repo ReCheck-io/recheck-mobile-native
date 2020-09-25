@@ -14,6 +14,8 @@ export default {
   name: 'AppLinks',
 
   mounted() {
+    window.launchedAppFromLink = true;
+
     setTimeout(() => {
       router.push({
         name: 'Scan',
@@ -22,7 +24,7 @@ export default {
           scanUrl: this.$route.params.scanUrl,
         }
       });
-    }, 500);
+    }, 800);
   },
 };
 </script>

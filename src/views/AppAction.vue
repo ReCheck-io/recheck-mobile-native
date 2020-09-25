@@ -34,7 +34,7 @@
       <div class="counter-wrapper">
         <v-progress-circular
           :rotate="-90"
-          :size="196"
+          :size="187"
           :width="11"
           :value="value"
           color="primary"
@@ -43,6 +43,25 @@
           <p class="countdown" id="timer">0:00</p>
         </v-progress-circular>
       </div>
+
+      <p class="agreement-text">
+        By approving the action you agree to our
+        <a
+          class="link"
+          href="https://recheck.io/privacy-policy-terms-of-use/"
+          target="_blank"
+        >
+          Privacy Policy
+        </a>
+        and
+        <a
+          class="link"
+          href="https://recheck.io/terms-and-conditions/"
+          target="_blank"
+        >
+          Terms &amp; Conditions
+        </a>.
+      </p>
     </div>
 
     <div class="btn-group">
@@ -124,6 +143,9 @@ export default {
       process.env.VUE_APP_NETWORK
     );
 
+    // Removes pinmodal-status event in order to prevent errors on Root
+    this.$root.$off('pinmodal-status');
+
     this.actionData = router.currentRoute.params && router.currentRoute.params.data
       ? JSON.parse(router.currentRoute.params.data)
       : {};
@@ -143,7 +165,10 @@ export default {
 
       this.selectionHash = this.actionData.selectionActionHash;
 
-      if (this.selectionHash.includes('se:') && this.actionData.type === 'share') {
+      if (
+        this.selectionHash.includes('se:')
+        && this.actionData.type === 'share'
+      ) {
         this.requestType = 'Email Share';
       } else {
         this.requestType = this.actionData.type;
@@ -155,7 +180,7 @@ export default {
 
       let timeLimit = this.actionData.ttl
         - (new Date(new Date().toUTCString()).getTime()
-        - new Date(this.utcTimestamp).getTime());
+          - new Date(this.utcTimestamp).getTime());
 
       timeLimit = Math.floor(timeLimit / 1000);
 
@@ -229,25 +254,33 @@ export default {
       this.showPinModal = false;
       this.$root.$emit('loaderOn');
 
-      chain.doExecSelection(this.pinCode, this.selectionHash, (err) => {
-        this.$root.$emit('loaderOff');
+      if (this.actionData.type === 'login' && this.actionData.qrUrl) {
+        let challenge = this.actionData.qrUrl.split('/login/')[1];
 
-        if (!err) {
-          this.$root.$emit('overlayOn', 'success');
-        } else if (err === 'authError') {
-          this.$root.$emit('alertOn', 'Passcode mismatch!', 'red');
-        } else {
-          this.$root.$emit('overlayOn', 'error');
-        }
-
-        if (!err || (err && err !== 'authError')) {
-          setTimeout(() => {
-            router.push('/scan');
-          }, 1810);
-        }
-      });
+        chain.doLogin(this.pinCode, challenge, (err) => this.actionCallback(err));
+      } else {
+        chain.doExecSelection(this.pinCode, this.selectionHash, (err) => this.actionCallback(err));
+      }
 
       this.pinCode = '';
+    },
+
+    actionCallback(err) {
+      this.$root.$emit('loaderOff');
+
+      if (!err) {
+        this.$root.$emit('overlayOn', 'success');
+      } else if (err === 'authError') {
+        this.$root.$emit('alertOn', 'Passcode mismatch!', 'red');
+      } else {
+        this.$root.$emit('overlayOn', 'error');
+      }
+
+      if (!err || (err && err !== 'authError')) {
+        setTimeout(() => {
+          router.push('/scan');
+        }, 1810);
+      }
     },
   },
 
@@ -279,6 +312,11 @@ export default {
     width: inherit;
     height: inherit;
 
+    .agreement-text {
+      text-align: center;
+      margin: 0;
+    }
+
     .data {
       .action {
         text-align: center;
@@ -303,7 +341,7 @@ export default {
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        margin: 24px 0 28px 0;
+        margin: 14px 0 20px 0;
 
         span {
           display: flex;
@@ -312,10 +350,6 @@ export default {
           justify-content: center;
           flex-wrap: wrap;
           width: 50%;
-
-          &:last-of-type {
-            margin-top: 18px;
-          }
 
           i {
             font-size: 22px;
@@ -337,7 +371,7 @@ export default {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
 
     .v-progress-circular {
       text-align: center;

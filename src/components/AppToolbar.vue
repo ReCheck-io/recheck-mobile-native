@@ -1,6 +1,8 @@
 <template>
   <v-app-bar class="primary" app>
-    <img src="../assets/recheck-logo.png" alt="ReCheck's Logo" class="recheck-logo" />
+    <a href="https://my.recheck.io" target="_blank" class="recheck-logo">
+      <img src="../assets/recheck-logo.png" alt="ReCheck's Logo" />
+    </a>
     <v-btn to="/about" color="white" icon fixed right>
       <v-icon>mdi-information-outline</v-icon>
     </v-btn>
@@ -15,6 +17,10 @@ export default {
 
 <style lang="scss">
 .recheck-logo {
-  max-height: 90%;
+  height: 100%;
+
+  img {
+    max-height: 90%;
+  }
 }
 </style>

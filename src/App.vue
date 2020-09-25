@@ -40,6 +40,7 @@ export default {
   },
 
   mounted() {
+    window.launchedAppFromLink = false;
     this.pinned = chainClient.pinned();
     this.checkIsScanPage(router.history.current);
     this.isActionPage = router.history.current.path === '/action';
