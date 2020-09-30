@@ -70,6 +70,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log('PAGES', from.path, to.path)
   if (from.path === '/scan') {
     window.QRScanner.cancelScan((status) => console.log(status));
     window.QRScanner.destroy((status) => console.log(status));

@@ -3,7 +3,7 @@ import VueCordova from 'vue-cordova';
 import VueQRCodeScanner from 'vue-qrcode-reader';
 import VueReCheckAuthorizer from 'vue-recheck-authorizer';
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
-
+import { logger } from 'vue-recheck-authorizer/src/utils/logger'
 import App from './App.vue';
 import store from './store';
 import router from './router';
@@ -24,23 +24,25 @@ function checkConnection() {
         router.push('/identity');
       }
     } else {
-      window.universalLinks.subscribe('qrScan', (eventData) => {
-        router.push({
-          name: 'Links',
-          params: {
-            omitCamera: true,
-            scanUrl: eventData.url
-          }
-        });
-      });
+      window.launchedAppFromLink = false;
+      window.IonicDeeplink.onDeepLink((data) => {
+        logger('Deeplink active', JSON.stringify(data, null, 4))
 
-      if (window.universalLinks.dpLink !== null) {
-        if (window.lastPage && window.lastPage !== router.currentRoute.path) {
-          router.push(window.lastPage);
-        } else if (router.currentRoute.path !== '/scan') {
-          router.push('/scan');
+        let linkParams = {
+          omitCamera: true,
+          scanUrl: data.url.replace('myrecheck', 'https')
         }
-      }
+
+        if (router.currentRoute.path !== '/links') {
+          router.push({
+            name: 'Links',
+            params: linkParams
+          });
+        } else {
+          router.currentRoute.params.scanUrl = linkParams.scanUrl;
+          router.currentRoute.params.omitCamera = linkParams.omitCamera;
+        }
+      })
     }
   }
 

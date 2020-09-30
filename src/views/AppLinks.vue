@@ -1,6 +1,6 @@
 <template>
-  <div class="py-0">
-    <div class="content">
+  <div class="links-container py-0">
+    <div class="links-content">
       <img src="../assets/loader.svg" width="64px" alt="SVG Loader">
       <h3>Processing QR code's data ...</h3>
     </div>
@@ -14,8 +14,6 @@ export default {
   name: 'AppLinks',
 
   mounted() {
-    window.launchedAppFromLink = true;
-
     setTimeout(() => {
       router.push({
         name: 'Scan',
@@ -24,13 +22,19 @@ export default {
           scanUrl: this.$route.params.scanUrl,
         }
       });
-    }, 800);
+    }, 1000);
   },
+
+  beforeRouteLeave(to, from, next) {
+    this.$route.params.omitCamera ? this.$route.params.omitCamera = null : '';
+    this.$route.params.scanUrl ? this.$route.params.scanUrl = null : '';
+    next()
+  }
 };
 </script>
 
 <style lang="scss">
-.content {
+.links-container .links-content {
   display: flex;
   align-items: center;
   justify-content: center;

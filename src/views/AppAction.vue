@@ -1,6 +1,6 @@
 <template>
   <div class="action-container py-0">
-    <div class="content px-3">
+    <div class="action-content px-3">
       <div class="data">
         <div class="action">
           <h3 v-if="!!requestType">{{ requestType }} Request</h3>
@@ -137,7 +137,7 @@ export default {
   },
 
   mounted() {
-    this.$root.$children[0].isActionPage = router.history.current.path === '/action';
+    this.$root.$children[0].isActionPage = this.$route.path === '/action';
     chain.setURLandNetwork(
       localStorage.getItem('apiUrl'),
       process.env.VUE_APP_NETWORK
@@ -308,9 +308,10 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 
-  .content {
+  .action-content {
     width: inherit;
     height: inherit;
+    margin-top: 0;
 
     .agreement-text {
       text-align: center;

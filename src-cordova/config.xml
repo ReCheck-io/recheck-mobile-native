@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget 
-    android-packageName="io.recheck.android" 
-    ios-CFBundleIdentifier="io.recheck"
     id="io.recheck"
-    version="1.0.19"
+    android-packageName="io.recheck.android"
+    ios-CFBundleIdentifier="io.recheck"
+    version="1.0.23"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
 >
@@ -19,7 +19,6 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="Orientation" value="portrait" />
     <preference name="ShowSplashScreenSpinner" value="false" />
@@ -59,6 +58,18 @@
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
             <string>need camera access to scan QR code</string>
         </edit-config>
+
+        <config-file parent="com.apple.developer.associated-domains" target="*-Debug.plist">
+            <array>
+                <string>applinks:*.recheck.io</string>
+            </array>
+        </config-file>
+        <config-file parent="com.apple.developer.associated-domains" target="*-Release.plist">
+            <array>
+                <string>applinks:*.recheck.io</string>
+            </array>
+        </config-file>
+
         <icon height="57" src="resources/icon/ios/icon.png" width="57" />
         <icon height="114" src="resources/icon/ios/icon@2x.png" width="114" />
         <icon height="40" src="resources/icon/ios/icon-40.png" width="40" />
@@ -94,18 +105,20 @@
     <plugin name="cordova-plugin-wkwebview-engine" spec="^1.2.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^6.0.0" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.2" />
-    <plugin name="cordova-plugin-deeplinks" spec="~1.1.1" />
 
-    <plugin name="cordova-plugin-firebasex" spec="latest" >
+    <plugin name="cordova-plugin-firebasex" spec="latest">
         <variable name="FIREBASE_ANALYTICS_COLLECTION_ENABLED" value="false" />
         <variable name="FIREBASE_PERFORMANCE_COLLECTION_ENABLED" value="false" />
         <variable name="FIREBASE_CRASHLYTICS_COLLECTION_ENABLED" value="false" />
     </plugin>
-    
-    <universal-links>
-        <host event="qrScan" name="*.recheck.io" scheme="https">
-            <path url="/login/*" />
-            <path url="/exec/*:*" />
-        </host>
-    </universal-links>
+
+    <plugin name="ionic-plugin-deeplinks" spec="github:byurhanbeyzat/ionic-plugin-deeplinks">
+        <variable name="URL_SCHEME" value="myrecheck" />
+        <variable name="DEEPLINK_SCHEME" value="https" />
+        <variable name="DEEPLINK_HOST" value="*.recheck.io" />
+        <variable name="ANDROID_PATH_PREFIX" value="/login/.*" />
+        <variable name="DEEPLINK_2_SCHEME" value="https" />
+        <variable name="DEEPLINK_2_HOST" value="*.recheck.io" />
+        <variable name="ANDROID_2_PATH_PREFIX" value="/exec/.*" />
+    </plugin>
 </widget>

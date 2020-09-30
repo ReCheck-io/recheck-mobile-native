@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "1.0.19",
+  "version": "1.0.23",
   "name": "recheck-mobile-native",
   "description": "ReCheck - ReCheck's native mobile application.",
   "author": "ReCheck BV <info@recheck.io>",

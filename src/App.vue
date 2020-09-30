@@ -19,6 +19,7 @@ import AppNavbar from '@/components/AppNavbar.vue';
 import AppAlert from '@/components/AppAlert.vue';
 import StatusOverlay from '@/components/StatusOverlay.vue';
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
+import { logger } from 'vue-recheck-authorizer/src/utils/logger';
 
 export default {
   name: 'App',

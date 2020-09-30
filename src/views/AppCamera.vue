@@ -27,6 +27,7 @@
 
 <script>
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
+import { logger } from 'vue-recheck-authorizer/src/utils/logger';
 
 export default {
   name: 'AppCamera',
@@ -41,33 +42,39 @@ export default {
 
       agreementText: 'By approving the action you agree to our <a class="link" href="https://recheck.io/privacy-policy-terms-of-use/" target="_blank">Privacy Policy</a> and <a class="link" href="https://recheck.io/terms-and-conditions/" target="_blank">Terms &amp; Conditions</a>.',
 
-      isCameraOmitted: this.$route.params.omitCamera
+      isCameraOmitted: this.$route.params.omitCamera && this.$route.params.omitCamera !== null
         ? this.$route.params.omitCamera
         : false,
-      scanLink: this.$route.params.scanUrl ? this.$route.params.scanUrl : '',
+      scanLink: this.$route.params.scanUrl && this.$route.params.scanUrl !== null
+        ? this.$route.params.scanUrl
+        : '',
     };
   },
 
   beforeMount() {
-    if (window.launchedAppFromLink) {
-      this.clearDeeplinks();
+    if (this.$route.params.omitCamera && this.$route.params.omitCamera !== null
+      && this.$route.params.scanUrl && this.$route.params.scanUrl !== null) {
+      window.launchedAppFromLink = true;
     }
   },
 
   mounted() {
-    this.$root.$children[0].isActionPage = this.$router.history.current.path === '/action';
+    logger(this.$route.params.omitCamera, this.$route.params.scanUrl);
+    this.$root.$children[0].isActionPage = this.$route.path === '/action';
     this.pinned = chainClient.pinned();
 
     this.$root.$on('pinmodal-status', (isActive) => {
-      if (this.$router.currentRoute.path === '/scan') {
-        if (isActive) {
-          this.showHints = !isActive;
-        } else {
-          this.showHints = !isActive;
-          this.clearDeeplinks();
-        }
+      if (isActive) {
+        this.showHints = !isActive;
+      } else {
+        this.showHints = !isActive;
       }
     });
+  },
+
+  beforeUpdate() {
+    this.$route.params.omitCamera ? this.$route.params.omitCamera = null : '';
+    this.$route.params.scanUrl ? this.$route.params.scanUrl = null : '';
   },
 
   methods: {
@@ -83,14 +90,19 @@ export default {
           this.clearDeeplinks();
           navigator.app.exitApp();
         }
-      }, 1900);
+      }, 2100);
     },
     clearDeeplinks() {
       this.$route.params.omitCamera ? this.$route.params.omitCamera = null : '';
       this.$route.params.scanUrl ? this.$route.params.scanUrl = null : '';
-      window.universalLinks.dpLink = null;
     }
   },
+
+  beforeRouteLeave(to, from, next) {
+    this.$route.params.omitCamera ? this.$route.params.omitCamera = null : '';
+    this.$route.params.scanUrl ? this.$route.params.scanUrl = null : '';
+    next()
+  }
 };
 </script>
 
