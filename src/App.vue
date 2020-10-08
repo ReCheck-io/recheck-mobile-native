@@ -47,9 +47,23 @@ export default {
     this.isActionPage = router.history.current.path === '/action';
 
     const firebase = window?.FirebasePlugin;
+    const cordova = window?.cordova;
 
     firebase.getToken((token) => this.setFirebaseToken(token));
     firebase.onMessageReceived((data) => this.handleNotifications(data));
+
+    cordova.getAppVersion.getVersionNumber().then((version) => {
+      localStorage.setItem(
+        'deviceInfo', `${cordova.platformId}:ReCheck-${version}`
+      );
+    });
+
+    // Replace user's public address prefix ak_ with re_
+    const publicAddress = localStorage.getItem('publicAddress');
+    if (publicAddress && publicAddress !== null && publicAddress.startsWith('ak_')) {
+      let newPublicAddress = publicAddress.replace('ak_', 're_');
+      localStorage.setItem('publicAddress', newPublicAddress);
+    }
 
     // Backup alert
     this.isBackupDone = JSON.parse(localStorage.getItem('backupDone'));

@@ -23,6 +23,7 @@
     "cordova-plugin-androidx": "^2.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.1",
     "cordova-plugin-app-exit": "0.0.2",
+    "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-enable-multidex": "^0.2.0",
     "cordova-plugin-firebasex": "^10.2.0-cli",
     "cordova-plugin-whitelist": "^1.3.4",
@@ -71,7 +72,8 @@
         "DEEPLINK_2_HOST": "*.recheck.io",
         "ANDROID_2_PATH_PREFIX": "/exec/.*"
       },
-      "cordova-plugin-app-exit": {}
+      "cordova-plugin-app-exit": {},
+      "cordova-plugin-app-version": {}
     },
     "platforms": [
       "android",

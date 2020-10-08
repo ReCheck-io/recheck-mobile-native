@@ -14,13 +14,16 @@
 
     <div class="guides" v-if="pinned" v-show="showHints">
       <img class="qr-scan-guides" src="../assets/scan.png" />
-      <div class="info-card">
-        <img src="../assets/scan-hint.svg" alt="svg" />
-        <p>
-          Open <b>my.recheck.io</b> on your computer and scan the QR
-          Code
-        </p>
-      </div>
+        <div class="info-card">
+          <img src="../assets/scan-hint.svg" alt="svg" />
+          <p>
+            Open
+            <a href="https://my.recheck.io" target="_blank">
+              <b>https://my.recheck.io</b>
+            </a> on your computer and scan the QR
+            Code
+          </p>
+        </div>
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@
     id="io.recheck"
     android-packageName="io.recheck.android"
     ios-CFBundleIdentifier="io.recheck"
-    version="1.0.23"
+    version="1.0.25"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
 >
