@@ -63,3 +63,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.v-item-group.v-bottom-navigation .v-btn {
+  font-size: 0.85rem;
+}
+</style>
