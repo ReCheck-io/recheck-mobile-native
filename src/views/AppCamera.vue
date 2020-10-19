@@ -38,30 +38,35 @@ export default {
       handledByComponent: true,
       useIntegratedCamera: false,
 
-      isCameraOmitted: this.$route.params.omitCamera
+      isCameraOmitted: this.$route.params.omitCamera && this.$route.params.omitCamera !== null
         ? this.$route.params.omitCamera
         : false,
-      scanLink: this.$route.params.scanUrl ? this.$route.params.scanUrl : '',
+      scanLink: this.$route.params.scanUrl && this.$route.params.scanUrl !== null
+        ? this.$route.params.scanUrl
+        : '',
     };
   },
 
   beforeMount() {
-    if (window.launchedAppFromLink) {
-      this.clearDeeplinks();
+    if (this.$route.params.omitCamera && this.$route.params.omitCamera !== null
+      && this.$route.params.scanUrl && this.$route.params.scanUrl !== null) {
+      window.launchedAppFromLink = true;
     }
+  },
+
+  beforeUpdate() {
+    this.$route.params.omitCamera ? this.$route.params.omitCamera = null : '';
+    this.$route.params.scanUrl ? this.$route.params.scanUrl = null : '';
   },
 
   mounted() {
     this.pinned = chainClient.pinned();
 
     this.$root.$on('pinmodal-status', (isActive) => {
-      if (this.$router.currentRoute.path === '/scan') {
-        if (isActive) {
-          this.showHints = !isActive;
-        } else {
-          this.showHints = !isActive;
-          this.clearDeeplinks();
-        }
+      if (isActive) {
+        this.showHints = !isActive;
+      } else {
+        this.showHints = !isActive;
       }
     });
   },
@@ -79,13 +84,18 @@ export default {
           this.clearDeeplinks();
           navigator.app.exitApp();
         }
-      }, 1900);
+      }, 2100);
     },
     clearDeeplinks() {
       this.$route.params.omitCamera ? this.$route.params.omitCamera = null : '';
       this.$route.params.scanUrl ? this.$route.params.scanUrl = null : '';
-      window.universalLinks.dpLink = null;
     }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$route.params.omitCamera ? this.$route.params.omitCamera = null : '';
+    this.$route.params.scanUrl ? this.$route.params.scanUrl = null : '';
+    next()
   }
 };
 </script>

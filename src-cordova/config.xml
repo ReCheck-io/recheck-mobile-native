@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="com.ipocean.android" id="com.ipocean.ios" ios-CFBundleIdentifier="com.ipocean.ios" version="1.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-packageName="com.ipocean.android" id="com.ipocean.ios" ios-CFBundleIdentifier="com.ipocean.ios" version="1.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ipOcean</name>
     <description>ipOcean</description>
     <author email="estoyanov@ipocean.com" href="https://ipocean.com">ipOcean Team</author>
@@ -55,6 +55,17 @@
         <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
             <string>need camera access to scan QR code</string>
         </edit-config>
+
+        <config-file parent="com.apple.developer.associated-domains" target="*-Debug.plist">
+            <array>
+                <string>applinks:chain.ipocean.com</string>
+            </array>
+        </config-file>
+        <config-file parent="com.apple.developer.associated-domains" target="*-Release.plist">
+            <array>
+                <string>applinks:chain.ipocean.com</string>
+            </array>
+        </config-file>
         
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
@@ -113,11 +124,11 @@
     <plugin name="cordova-plugin-splashscreen" spec="~6.0.0" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.2" />
     <plugin name="cordova-plugin-wkwebview-engine" spec="^1.2.1" />
-    <plugin name="cordova-plugin-deeplinks" spec="^1.1.1" />
 
-    <universal-links>
-        <host event="qrScan" name="chain.ipocean.com" scheme="https">
-            <path url="/login/*" />
-        </host>
-    </universal-links>
+    <plugin name="ionic-plugin-deeplinks" spec="github:byurhanbeyzat/ionic-plugin-deeplinks">
+        <variable name="URL_SCHEME" value="myipocean" />
+        <variable name="DEEPLINK_SCHEME" value="https" />
+        <variable name="DEEPLINK_HOST" value="chain.ipocean.com" />
+        <variable name="ANDROID_PATH_PREFIX" value="/login/.*" />
+    </plugin>
 </widget>

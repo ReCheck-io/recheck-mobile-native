@@ -47,17 +47,21 @@
 </template>
 
 <script>
-import pkg from '../../package.json'
-
 export default {
   name: 'AppAbout',
 
   data() {
     return {
-      pkgVersion: pkg.version,
+      pkgVersion: '0.0.0',
       currentYear: new Date().getFullYear(),
     };
   },
+
+  mounted() {
+    window.cordova.getAppVersion.getVersionNumber().then((version) => {
+      this.pkgVersion = version;
+    });
+  }
 };
 </script>
 

@@ -5,10 +5,10 @@
 
     <v-main>
       <router-view />
-      <AppAlert :isBackupDone="pinned && !isBackupDone" />
+      <AppAlert  :isBackupDone="pinned && !isBackupDone" />
     </v-main>
 
-    <AppNavbar />
+    <AppNavbar  />
   </v-app>
 </template>
 
@@ -34,7 +34,7 @@ export default {
     return {
       pinned: false,
       isBackupDone: true,
-      isScanPage: '#FFFFFF',
+      isScanPage: '#FFFFFF'
     };
   },
 
@@ -43,9 +43,18 @@ export default {
     this.pinned = chainClient.pinned();
     this.checkIsScanPage(router.history.current);
 
+    const cordova = window?.cordova;
+
+    cordova.getAppVersion.getVersionNumber().then((version) => {
+      localStorage.setItem(
+        'deviceInfo', `${cordova.platformId}:ipOcean-${version}`
+      );
+    });
+
+    // Backup alert
     this.isBackupDone = JSON.parse(localStorage.getItem('backupDone'));
 
-    if (chainClient.pinned()) {
+    if (this.pinned) {
       setTimeout(() => {
         if (!this.isBackupDone) {
           this.isBackupDone = true;

@@ -3,6 +3,7 @@ import VueCordova from 'vue-cordova';
 import VueQRCodeScanner from 'vue-qrcode-reader';
 import VueReCheckAuthorizer from 'vue-recheck-authorizer';
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
+import { logger } from 'vue-recheck-authorizer/src/utils/logger'
 
 import App from './App.vue';
 import store from './store';
@@ -24,23 +25,25 @@ function checkConnection() {
         router.push('/identity');
       }
     } else {
-      window.universalLinks.subscribe('qrScan', (eventData) => {
-        router.push({
-          name: 'Links',
-          params: {
-            omitCamera: true,
-            scanUrl: eventData.url
-          }
-        });
-      });
+      window.launchedAppFromLink = false;
+      window.IonicDeeplink.onDeepLink((data) => {
+        logger('Deeplink active', JSON.stringify(data, null, 4))
 
-      if (window.universalLinks.dpLink !== null) {
-        if (window.lastPage && window.lastPage !== router.currentRoute.path) {
-          router.push(window.lastPage);
-        } else if (router.currentRoute.path !== '/scan') {
-          router.push('/scan');
+        let linkParams = {
+          omitCamera: true,
+          scanUrl: data.url.replace('myipocean', 'https')
         }
-      }
+
+        if (router.currentRoute.path !== '/links') {
+          router.push({
+            name: 'Links',
+            params: linkParams
+          });
+        } else {
+          router.currentRoute.params.scanUrl = linkParams.scanUrl;
+          router.currentRoute.params.omitCamera = linkParams.omitCamera;
+        }
+      })
     }
   }
 
@@ -68,7 +71,6 @@ const initApp = () => {
     vuetify,
     render: (h) => h(App),
 
-    methods: {},
     mounted() {
       chainClient.setURLandNetwork('', process.env.VUE_APP_NETWORK);
       checkConnection();
@@ -84,6 +86,9 @@ const initApp = () => {
 
 // Wait for the deviceready event to start the render
 document.addEventListener('deviceready', () => {
+  let lastTimeBackPress = 0;
+  const timePeriodToExit = 2000;
+
   initApp();
 
   document.addEventListener('pause', () => {
@@ -92,6 +97,20 @@ document.addEventListener('deviceready', () => {
 
   document.addEventListener('resume', () => {
     checkConnection();
+  }, false);
+
+  document.addEventListener('backbutton', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+      navigator.app.exitApp();
+    } else {
+      if (router.currentRoute.path !== '/scan') {
+        router.push('/scan');
+      }
+      lastTimeBackPress = new Date().getTime();
+    }
   }, false);
 });
 
