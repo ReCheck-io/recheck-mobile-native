@@ -106,6 +106,7 @@ import InputModal from 'vue-recheck-authorizer/src/components/modals/InputModal.
 import Loader from 'vue-recheck-authorizer/src/components/loader/Loader.vue';
 import Alert from 'vue-recheck-authorizer/src/components/alert/Alert.vue';
 import chain from 'vue-recheck-authorizer/src/chain';
+import { logger } from 'vue-recheck-authorizer/src/utils';
 import router from '../router';
 
 export default {
@@ -258,7 +259,12 @@ export default {
         let challenge = this.actionData.qrUrl.split('/login/')[1];
 
         chain.doLogin(this.pinCode, challenge, (err) => this.actionCallback(err));
-      } else {
+      } else if (this.actionData.qrUrl) {
+        let { origin } = new URL(this.actionData.qrUrl);
+
+        localStorage.setItem('apiUrl', origin);
+        chain.setURLandNetwork(origin, process.env.VUE_APP_NETWORK);
+
         chain.doExecSelection(this.pinCode, this.selectionHash, (err) => this.actionCallback(err));
       }
 

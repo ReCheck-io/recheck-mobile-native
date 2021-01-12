@@ -1,7 +1,7 @@
 <template>
   <v-card flat tile>
     <v-card-text>
-      <h2 class="mt-1 mb-5 text-center">About My ReCheck</h2>
+      <h2 class="mt-1 mb-5 text-center" @click="count()">About My ReCheck</h2>
       <p>
         <b>Freedom and safety in the digital world</b>
       </p>
@@ -47,11 +47,14 @@
 </template>
 
 <script>
+import router from '../router'
+
 export default {
   name: 'AppAbout',
 
   data() {
     return {
+      clicksCount: 0,
       pkgVersion: '0.0.0',
       currentYear: new Date().getFullYear(),
     };
@@ -63,6 +66,17 @@ export default {
     window.cordova.getAppVersion.getVersionNumber().then((version) => {
       this.pkgVersion = version;
     });
+  },
+  methods: {
+    count() {
+      if (this.clicksCount < 6) {
+        this.clicksCount += 1;
+        return;
+      }
+
+      this.clicksCount = 0;
+      router.push('/app-logs');
+    }
   }
 };
 </script>

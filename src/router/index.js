@@ -23,6 +23,11 @@ const AppLinks = (resolve) => {
     resolve(require('@/views/AppLinks'));
   });
 };
+const AppLogs = (resolve) => {
+  require.ensure(['@/views/AppLogs'], () => {
+    resolve(require('@/views/AppLogs'));
+  });
+};
 const AppAbout = (resolve) => {
   require.ensure(['@/views/AppAbout'], () => {
     resolve(require('@/views/AppAbout'));
@@ -63,6 +68,12 @@ const router = new Router({
       props: true
     },
     {
+      name: 'Logs',
+      path: '/app-logs',
+      component: AppLogs,
+      props: true
+    },
+    {
       path: '*',
       redirect: '/identity',
     },
@@ -70,7 +81,6 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log('PAGES', from.path, to.path)
   if (from.path === '/scan') {
     window.QRScanner.cancelScan((status) => console.log(status));
     window.QRScanner.destroy((status) => console.log(status));
