@@ -1,11 +1,27 @@
 <template>
   <div class="px-3 py-0">
+
     <recheck-identity
       :mobileBackup="mobileBackup"
       appName="My ReCheck"
       classes="my-styles"
       ref="id"
     />
+
+    <card v-if="pinned && (!hasRegisteredFingerprint || !hasFingerprintReader)">
+      <template #header>Settings</template>
+      Setup fingerprint authentication for your ID.
+      <template #footer>
+        <button
+          type="button"
+          class="btn"
+          @click="registerFingerprint"
+          v-show="!hasRegisteredFingerprint && hasFingerprintReader"
+        >
+          Setup Fingerprint Auth
+        </button>
+      </template>
+    </card>
 
     <div v-if="pinned && backupMode" class="backup-identity my-styles">
       <card v-if="showInfoStep">
@@ -155,6 +171,8 @@ export default {
       showInfoStep: true,
       showPrivateKeyStep: false,
       verifyPrivateKeyStep: false,
+      hasRegisteredFingerprint: JSON.parse(localStorage.getItem('hasRegisteredFingerprint')) || false,
+      hasFingerprintReader: this.hasRegisteredFingerprint,
     };
   },
 
@@ -177,9 +195,70 @@ export default {
       this.privateKey = pk;
       this.showPrivateKey();
     });
+
+    if (chainClient.pinned() && !this.hasRegisteredFingerprint) {
+      this.checkForFingerprintReader();
+    }
   },
 
   methods: {
+    registerFingerprint() {
+      const onSuccess = function onSuccess(result) {
+        console.log('registerFingerprint Success', result);
+        if (['biometric_success'].includes(result)) {
+          this.hasRegisteredFingerprint = true;
+          localStorage.setItem('hasRegisteredFingerprint', true);
+        }
+      }.bind(this)
+
+      const onError = function onError(result) {
+        console.log('Error', result);
+        if (result && result.code === -112) {
+          this.$root.$emit('alertOn', result.message, 'red');
+        }
+      }.bind(this);
+
+      if (window.Fingerprint) {
+        const fingerprint = window.Fingerprint;
+
+        this.$root.$emit('biometric-require-pin');
+        this.$root.$on('biometric-pin', (pin) => {
+          if (pin) {
+            fingerprint.registerBiometricSecret({
+              title: 'ReCheck Authentication',
+              description: 'Register your fingerprint',
+              invalidateOnEnrollment: true,
+              confirmationRequired: false,
+              disableBackup: true,
+
+              // TODO: fallback method usage
+              // cancelButtonTitle: 'Use Backup',
+              // disableBackup: false,
+              secret: pin,
+            }, onSuccess, onError);
+          }
+        });
+      }
+    },
+
+    checkForFingerprintReader() {
+      const onSuccess = function onSuccess(result) {
+        console.log('checkForFingerprintReader Success', result);
+        if (['face', 'finger', 'biometric'].includes(result)) {
+          this.hasFingerprintReader = true;
+        }
+      }.bind(this);
+
+      function onError(result) {
+        console.log('Error', result)
+      }
+
+      if (window.Fingerprint) {
+        const fingerprint = window.Fingerprint
+        fingerprint.isAvailable(onSuccess, onError);
+      }
+    },
+
     exportPrivateKey() {
       const socialShare = window?.plugins?.socialsharing
 

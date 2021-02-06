@@ -8,10 +8,11 @@
   "main": "index.js",
   "scripts": {},
   "dependencies": {
-    "cordova-android": "^8.1.0",
+    "cordova-android": "^9.0.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-dialogs": "^2.0.2",
+    "cordova-plugin-fingerprint-aio": "4.0.2",
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-qrscanner": "^3.0.1",
@@ -73,11 +74,12 @@
         "ANDROID_2_PATH_PREFIX": "/exec/.*"
       },
       "cordova-plugin-app-exit": {},
-      "cordova-plugin-app-version": {}
+      "cordova-plugin-app-version": {},
+      "cordova-plugin-fingerprint-aio": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

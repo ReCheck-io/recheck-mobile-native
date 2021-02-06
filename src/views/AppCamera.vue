@@ -73,6 +73,16 @@ export default {
         this.showHints = !isActive;
       }
     });
+
+    this.$root.$on('biometric-required', () => {
+      const hasRegisteredFingerprint = JSON.parse(
+        localStorage.getItem('hasRegisteredFingerprint')
+      );
+
+      if (hasRegisteredFingerprint) {
+        this.requireFingerprint();
+      }
+    });
   },
 
   beforeUpdate() {
@@ -81,6 +91,40 @@ export default {
   },
 
   methods: {
+    requireFingerprint() {
+      const onSuccess = function onSuccess(secret) {
+        console.log('requireFingerprint Success', secret);
+        if (secret) {
+          this.$root.$emit('biometric-success', secret);
+        }
+      }.bind(this)
+
+      const onError = function onError(result) {
+        console.log('Error', result);
+        if (result && result.code === -102) {
+          this.requireFingerprint();
+        }
+      }.bind(this)
+
+      if (window.Fingerprint) {
+        const fingerprint = window.Fingerprint
+
+        fingerprint.loadBiometricSecret(
+          {
+            title: 'ReCheck Authentication',
+            description: 'Swipe your fingerprint',
+            invalidateOnEnrollment: true,
+            confirmationRequired: false,
+            disableBackup: true,
+
+            // TODO: fallback method usage
+            // cancelButtonTitle: 'Use Backup',
+            // disableBackup: false,
+          }, onSuccess, onError
+        );
+      }
+    },
+
     handleResult(hasError) {
       if (!hasError) {
         this.$root.$emit('overlayOn', 'success');

@@ -194,6 +194,41 @@ export default {
   },
 
   methods: {
+    requireFingerprint() {
+      const onSuccess = function onSuccess(secret) {
+        console.log('requireFingerprint Success', secret);
+        if (secret) {
+          this.confirmPin(secret);
+        }
+      }.bind(this)
+
+      const onError = function onError(result) {
+        console.log('Error', result);
+        if (result && result.code === -102) {
+          this.requireFingerprint();
+        }
+      }.bind(this)
+
+      if (window.Fingerprint) {
+        const fingerprint = window.Fingerprint
+
+        fingerprint.loadBiometricSecret(
+          {
+            title: 'ReCheck Authentication',
+            description: 'Swipe your fingerprint',
+            invalidateOnEnrollment: true,
+            confirmationRequired: false,
+            disableBackup: true,
+
+            // TODO: fallback method usage
+            // cancelButtonTitle: 'Use Backup',
+            // disableBackup: false,
+          }, onSuccess, onError
+        );
+      }
+    },
+
+    //
     startTimer(timeLimit) {
       const TIME_TO_INCREMENT = 100 / timeLimit;
       let timePassed = 0;
@@ -251,7 +286,11 @@ export default {
       this.showPinModal = false;
     },
 
-    confirmPin() {
+    confirmPin(secret) {
+      if (typeof secret === 'string') {
+        this.pinCode = secret;
+      }
+
       this.showPinModal = false;
       this.$root.$emit('loaderOn');
 
