@@ -4,18 +4,18 @@ import Router from 'vue-router';
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
 
 const AppCamera = (resolve) => {
-  require.ensure(['@/views/AppCamera'], () => {
-    resolve(require('@/views/AppCamera'));
+  require.ensure(['@/views/camera'], () => {
+    resolve(require('@/views/camera'));
   });
 };
 const AppIdentity = (resolve) => {
-  require.ensure(['@/views/AppIdentity'], () => {
-    resolve(require('@/views/AppIdentity'));
+  require.ensure(['@/views/identity'], () => {
+    resolve(require('@/views/identity'));
   });
 };
-const AppAction = (resolve) => {
-  require.ensure(['@/views/AppAction'], () => {
-    resolve(require('@/views/AppAction'));
+const AppNotifications = (resolve) => {
+  require.ensure(['@/views/notification'], () => {
+    resolve(require('@/views/notification'));
   });
 };
 const AppLinks = (resolve) => {
@@ -56,9 +56,9 @@ const router = new Router({
       props: true
     },
     {
-      name: 'Action',
-      path: '/action',
-      component: AppAction,
+      name: 'Notification',
+      path: '/notification',
+      component: AppNotifications,
       props: true
     },
     {
@@ -82,9 +82,9 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (from.path === '/scan') {
-    window.QRScanner.cancelScan((status) => console.log(status));
-    window.QRScanner.destroy((status) => console.log(status));
-    window.QRScanner.hide((status) => console.log(status));
+    // window.QRScanner.cancelScan((status) => console.log(status));
+    // window.QRScanner.destroy((status) => console.log(status));
+    // window.QRScanner.hide((status) => console.log(status));
   }
 
   if (!chainClient.pinned() && !['/identity', '/'].includes(to.path)) {

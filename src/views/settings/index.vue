@@ -159,7 +159,7 @@ export default {
   },
 
   mounted() {
-    this.$root.$children[0].isActionPage = this.$router.history.current.path === '/action';
+    this.$root.$children[0].isActionPage = this.$router.history.current.path === '/notification';
     this.pinned = chainClient.pinned();
 
     this.$root.$on('backupMode', (res) => {

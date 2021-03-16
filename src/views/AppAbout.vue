@@ -61,7 +61,7 @@ export default {
   },
 
   mounted() {
-    this.$root.$children[0].isActionPage = this.$route.path === '/action';
+    this.$root.$children[0].isActionPage = this.$route.path === '/notification';
 
     window.cordova.getAppVersion.getVersionNumber().then((version) => {
       this.pkgVersion = version;

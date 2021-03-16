@@ -107,7 +107,7 @@ import Loader from 'vue-recheck-authorizer/src/components/loader/Loader.vue';
 import Alert from 'vue-recheck-authorizer/src/components/alert/Alert.vue';
 import chain from 'vue-recheck-authorizer/src/chain';
 import { logger } from 'vue-recheck-authorizer/src/utils';
-import router from '../router';
+import router from '../../router';
 
 export default {
   name: 'AppAction',
@@ -138,7 +138,7 @@ export default {
   },
 
   mounted() {
-    this.$root.$children[0].isActionPage = this.$route.path === '/action';
+    this.$root.$children[0].isActionPage = this.$route.path === '/notification';
     chain.setURLandNetwork(
       localStorage.getItem('apiUrl'),
       process.env.VUE_APP_NETWORK

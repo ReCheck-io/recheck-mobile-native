@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueCordova from 'vue-cordova';
-import VueQRCodeScanner from 'vue-qrcode-reader';
+// import VueQRCodeScanner from 'vue-qrcode-reader';
 import VueReCheckAuthorizer from 'vue-recheck-authorizer';
 import chainClient from 'vue-recheck-authorizer/src/chain/index';
 import { logger } from 'vue-recheck-authorizer/src/utils/logger'
@@ -12,7 +12,7 @@ import vuetify from './plugins/vuetify';
 import '../node_modules/vue-recheck-authorizer/dist/main.css';
 
 Vue.use(VueCordova);
-Vue.use(VueQRCodeScanner);
+// Vue.use(VueQRCodeScanner);
 Vue.use(VueReCheckAuthorizer);
 
 Vue.config.productionTip = false;
@@ -71,6 +71,7 @@ const initApp = () => {
     render: (h) => h(App),
 
     mounted() {
+      chainClient.setInstance('ReCheckAPP');
       chainClient.setURLandNetwork('', process.env.VUE_APP_NETWORK);
       checkConnection();
 

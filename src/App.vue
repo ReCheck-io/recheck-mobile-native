@@ -36,15 +36,16 @@ export default {
       pinned: false,
       isBackupDone: true,
       isScanPage: '#FFFFFF',
-      isActionPage: router.history.current.path === '/action'
+      isActionPage: router.history.current.path === '/notification'
     };
   },
 
   mounted() {
     window.launchedAppFromLink = false;
     this.pinned = chainClient.pinned();
+    chainClient.setInstance('ReCheckAPP');
     this.checkIsScanPage(router.history.current);
-    this.isActionPage = router.history.current.path === '/action';
+    this.isActionPage = router.history.current.path === '/notification';
 
     const firebase = window?.FirebasePlugin;
     const cordova = window?.cordova;
@@ -94,7 +95,7 @@ export default {
 
     handleNotifications(data) {
       if (data && data.data && JSON.parse(data.data).selectionActionHash) {
-        if (router.currentRoute.path !== '/action') {
+        if (router.currentRoute.path !== '/notification') {
           router.push({
             name: 'Action',
             params: data
@@ -105,8 +106,8 @@ export default {
   },
 
   watch: {
-    $route(res) {
-      this.checkIsScanPage(res);
+    $route(props) {
+      this.checkIsScanPage(props);
     },
   }
 };
@@ -114,7 +115,7 @@ export default {
 
 <style>
 body {
-  font-family: "Roboto", -apple-system, 'Open Sans', sans-serif;
+  font-family: "Roboto", Inter, 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1;
@@ -126,5 +127,13 @@ body {
 
 .alert p {
   margin-bottom: 0;
+}
+
+button.v-btn {
+  height: 39px !important;
+  padding: 0 16px !important;
+  text-transform: initial;
+  display: flex;
+  flex: 1 0 auto;
 }
 </style>
