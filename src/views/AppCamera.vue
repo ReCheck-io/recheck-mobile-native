@@ -7,7 +7,7 @@
       :isCameraOmitted="isCameraOmitted"
       :agreementText="agreementText"
       :scanLink="scanLink"
-      appRequestId="ReCheckAPP"
+      appRequestId="TransparencyAPP"
       classes="my-styles"
       ref="camera"
     />

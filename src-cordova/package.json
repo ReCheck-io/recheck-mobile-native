@@ -9,7 +9,6 @@
   "scripts": {},
   "dependencies": {
     "cordova-android": "^8.1.0",
-    "cordova-ios": "^5.1.1",
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-network-information": "^2.0.2",
@@ -20,6 +19,7 @@
     "cordova-plugin-wkwebview-engine": "^1.2.1"
   },
   "devDependencies": {
+    "cordova-ios": "^6.2.0",
     "cordova-plugin-androidx": "^2.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.1",
     "cordova-plugin-app-exit": "0.0.2",
@@ -76,8 +76,7 @@
       "cordova-plugin-app-version": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ]
   }
 }

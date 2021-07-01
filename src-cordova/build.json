@@ -3,15 +3,15 @@
     "debug": {
       "keystore": "./app.keystore",
       "storePassword": "recheck",
-      "alias": "recheck",
-      "password" : "recheck",
+      "alias": "transparency",
+      "password" : "transparency",
       "keystoreType": "jks"
     },
     "release": {
       "keystore": "./app.keystore",
       "storePassword": "recheck",
-      "alias": "recheck",
-      "password" : "recheck",
+      "alias": "transparency",
+      "password" : "transparency",
       "keystoreType": "jks"
     }
   }
