@@ -7,7 +7,7 @@
       :isCameraOmitted="isCameraOmitted"
       :agreementText="agreementText"
       :scanLink="scanLink"
-      appRequestId="TransparencyAPP"
+      appRequestId="ReCheckEthAPP"
       classes="my-styles"
       ref="camera"
     />
@@ -18,8 +18,8 @@
           <img src="../assets/scan-hint.svg" alt="svg" />
           <p>
             Open
-            <a href="https://my.recheck.io" target="_blank">
-              <b>https://my.recheck.io</b>
+            <a href="https://finedu.recheck.io" target="_blank">
+              <b>https://finedu.recheck.io</b>
             </a> on your computer and scan the QR
             Code
           </p>

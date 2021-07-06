@@ -54,7 +54,7 @@ export default {
 
     cordova.getAppVersion.getVersionNumber().then((version) => {
       localStorage.setItem(
-        'deviceInfo', `${cordova.platformId}:Transparency-${version}`
+        'deviceInfo', `${cordova.platformId}:ReCheck-ETH-${version}`
       );
     });
 

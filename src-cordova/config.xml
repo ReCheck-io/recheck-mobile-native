@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget
-    android-packageName="io.recheck.transparency.android"
-    id="io.recheck.transparency"
-    ios-CFBundleIdentifier="io.recheck.transparency"
+    android-packageName="io.recheck.eth.android"
+    id="io.recheck.eth"
+    ios-CFBundleIdentifier="io.recheck.eth"
     version="1.0.0"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
 >
-    <name>Transparency</name>
-    <description>Transparency - ReCheck's native mobile app.</description>
+    <name>ReCheck</name>
+    <description>ReCheck - ReCheck's native mobile app.</description>
     <author email="info@recheck.io" href="https://recheck.io">ReCheck Team</author>
     <hook src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" type="after_prepare" />
     <content src="index.html" />
