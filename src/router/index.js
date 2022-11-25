@@ -13,16 +13,6 @@ const AppIdentity = (resolve) => {
     resolve(require('@/views/AppIdentity'));
   });
 };
-const AppAction = (resolve) => {
-  require.ensure(['@/views/AppAction'], () => {
-    resolve(require('@/views/AppAction'));
-  });
-};
-const AppLinks = (resolve) => {
-  require.ensure(['@/views/AppLinks'], () => {
-    resolve(require('@/views/AppLinks'));
-  });
-};
 const AppLogs = (resolve) => {
   require.ensure(['@/views/AppLogs'], () => {
     resolve(require('@/views/AppLogs'));
@@ -53,18 +43,6 @@ const router = new Router({
       name: 'Identity',
       path: '/identity',
       component: AppIdentity,
-      props: true
-    },
-    {
-      name: 'Action',
-      path: '/action',
-      component: AppAction,
-      props: true
-    },
-    {
-      name: 'Links',
-      path: '/links',
-      component: AppLinks,
       props: true
     },
     {

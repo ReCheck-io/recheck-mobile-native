@@ -41,16 +41,11 @@ export default {
   },
 
   mounted() {
-    window.launchedAppFromLink = false;
     this.pinned = chainClient.pinned();
     this.checkIsScanPage(router.history.current);
     this.isActionPage = router.history.current.path === '/action';
 
-    const firebase = window?.FirebasePlugin;
     const cordova = window?.cordova;
-
-    firebase.getToken((token) => this.setFirebaseToken(token));
-    firebase.onMessageReceived((data) => this.handleNotifications(data));
 
     cordova.getAppVersion.getVersionNumber().then((version) => {
       localStorage.setItem(
@@ -86,22 +81,6 @@ export default {
       }
     },
 
-    setFirebaseToken(token) {
-      if (token && token !== null) {
-        localStorage.setItem('firebaseToken', token);
-      }
-    },
-
-    handleNotifications(data) {
-      if (data && data.data && JSON.parse(data.data).selectionActionHash) {
-        if (router.currentRoute.path !== '/action') {
-          router.push({
-            name: 'Action',
-            params: data
-          })
-        }
-      }
-    }
   },
 
   watch: {

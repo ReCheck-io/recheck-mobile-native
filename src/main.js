@@ -23,26 +23,6 @@ function checkConnection() {
       if (router.currentRoute.path !== '/identity') {
         router.push('/identity');
       }
-    } else {
-      window.launchedAppFromLink = false;
-      window.IonicDeeplink.onDeepLink((data) => {
-        logger('Deeplink active', JSON.stringify(data, null, 4))
-
-        let linkParams = {
-          omitCamera: true,
-          scanUrl: data.url.replace('myrecheck', 'https')
-        }
-
-        if (router.currentRoute.path !== '/links') {
-          router.push({
-            name: 'Links',
-            params: linkParams
-          });
-        } else {
-          router.currentRoute.params.scanUrl = linkParams.scanUrl;
-          router.currentRoute.params.omitCamera = linkParams.omitCamera;
-        }
-      })
     }
   }
 
@@ -73,16 +53,6 @@ const initApp = () => {
     mounted() {
       chainClient.setURLandNetwork('', process.env.VUE_APP_NETWORK);
       checkConnection();
-
-      const firebase = window?.FirebasePlugin;
-
-      firebase.hasPermission((status) => {
-        if (!status) {
-          firebase.grantPermission((hasPermission) => {
-            console.log(`Permissions was ${hasPermission ? 'granted' : 'denied'}`);
-          })
-        }
-      });
 
       window.QRScanner.getStatus((status) => {
         if (!status.prepared) {

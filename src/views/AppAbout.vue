@@ -30,7 +30,7 @@
         <a href="http://recheck.io/faq/" target="_blank">FAQ</a>
         <a href="https://recheck.io/contact-us/" target="_blank">Contact Us</a>
         <a
-          href="https://recheck.io/privacy-policy-terms-of-use/"
+          href="https://recheck.io/privacy/"
           target="_blank"
         >
           Terms and Privacy Policy
